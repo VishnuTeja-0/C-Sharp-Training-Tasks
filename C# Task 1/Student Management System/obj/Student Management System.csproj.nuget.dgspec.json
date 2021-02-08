@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Task 1\\Student Management System\\Student Management System.csproj": {}
+    "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 1\\Student Management System\\Student Management System.csproj": {}
   },
   "projects": {
-    "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Task 1\\Student Management System\\Student Management System.csproj": {
+    "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 1\\Student Management System\\Student Management System.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Task 1\\Student Management System\\Student Management System.csproj",
+        "projectUniqueName": "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 1\\Student Management System\\Student Management System.csproj",
         "projectName": "Student Management System",
-        "projectPath": "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Task 1\\Student Management System\\Student Management System.csproj",
+        "projectPath": "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 1\\Student Management System\\Student Management System.csproj",
         "packagesPath": "C:\\Users\\C.V SARADA\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Task 1\\Student Management System\\obj\\",
+        "outputPath": "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 1\\Student Management System\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
