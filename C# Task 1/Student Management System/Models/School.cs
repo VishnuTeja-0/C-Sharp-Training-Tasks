@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace StudentManagement
+namespace StudentManagement.Models
 {
     class School
     {
@@ -16,22 +16,19 @@ namespace StudentManagement
             _students = new List<Student>();
         }
 
-        public void SetSchoolName()
+        public void SetSchoolName(string name)
         {
-            Console.WriteLine("Enter The School Name: ");
-            while (true)
-            {
-                string strIn = Console.ReadLine();
-                if (strIn.All(char.IsLetter))
-                {
-                    _schoolName = strIn;
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Input. School Name can only be alphabetical. Please try again.");
-                }
-            }
+            _schoolName = name;
+        }
+
+        public void AddSubject(string subject)
+        {
+            _subjects.Add(subject);
+        }
+
+        public void AddStudent(Student student)
+        {
+            _students.Add(student);
         }
 
         public List<Student> GetStudentList()

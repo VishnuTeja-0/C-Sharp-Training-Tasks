@@ -1,0 +1,13 @@
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 1\Student Management System\bin\Debug\netcoreapp3.1\StudentManagementSystem.exe
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 1\Student Management System\bin\Debug\netcoreapp3.1\StudentManagementSystem.deps.json
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 1\Student Management System\bin\Debug\netcoreapp3.1\StudentManagementSystem.runtimeconfig.json
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 1\Student Management System\bin\Debug\netcoreapp3.1\StudentManagementSystem.runtimeconfig.dev.json
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 1\Student Management System\bin\Debug\netcoreapp3.1\StudentManagementSystem.dll
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 1\Student Management System\bin\Debug\netcoreapp3.1\StudentManagementSystem.pdb
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 1\Student Management System\obj\Debug\netcoreapp3.1\StudentManagementSystem.csprojAssemblyReference.cache
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 1\Student Management System\obj\Debug\netcoreapp3.1\StudentManagementSystem.AssemblyInfoInputs.cache
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 1\Student Management System\obj\Debug\netcoreapp3.1\StudentManagementSystem.AssemblyInfo.cs
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 1\Student Management System\obj\Debug\netcoreapp3.1\StudentManagementSystem.csproj.CoreCompileInputs.cache
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 1\Student Management System\obj\Debug\netcoreapp3.1\StudentManagementSystem.dll
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 1\Student Management System\obj\Debug\netcoreapp3.1\StudentManagementSystem.pdb
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 1\Student Management System\obj\Debug\netcoreapp3.1\StudentManagementSystem.genruntimeconfig.cache
