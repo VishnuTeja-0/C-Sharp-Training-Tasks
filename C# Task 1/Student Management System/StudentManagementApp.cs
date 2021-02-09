@@ -1,77 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using StudentManagement.Models;
 
 namespace StudentManagement
 {
-    class StudentManagementApp
+    class StudentManagementApp : Operations
     {
         // To perform operation of printing progress card of existing student with existing marks record
-        private void ShowProgress(School school, Helper helper)
+        private void ShowProgress(School school)
         {
-            Operations op = new Operations();
-            op.GenerateReportCard(school);
+            GenerateReportCard(school);
             Console.ReadKey(false);
             Console.Clear();
-            helper.PrintMenu(school);
+            PrintMenu(school);
         }
 
         // To perform operation for adding marks for existing student
-        private void AddMarks(School school, Helper helper)
+        private void AddMarks(School school)
         {
-            Operations ops = new Operations();
-            ops.AddMarks(school);
+            AddStudentMarks(school);
             Console.WriteLine("Press Any Key to Continue");
             Console.ReadKey(false);
             Console.Clear();
-            helper.PrintMenu(school);
+            PrintMenu(school);
         }
 
         // To perform operation of adding new student details
-        private void AddStudent(School school, Helper helper)
+        private void AddStudent(School school)
         {
             Student student = new Student();
-            student.SetStudentDetails(school);
-            school.GetStudentList().Add(student);
+            SetStudentDetails(school, student);
+            school.AddStudent(student);
             Console.WriteLine("Press Any Key to Continue");
             Console.ReadKey(false);
             Console.Clear();
-            helper.PrintMenu(school);
+            PrintMenu(school);
         }
 
         // For printing main menu
         
 
         // For main student management options
-        private void MainMenu(School school, Helper helper)
+        private void MainMenu(School school)
         {
             Console.Clear();
-            helper.PrintMenu(school);
+            PrintMenu(school);
             while (true)
             {
-                string strin = Console.ReadLine();
-                if (strin.All(char.IsDigit))
+                int option = ValidNumberInput();
+                switch (option)
                 {
-                    int opt = Convert.ToInt32(strin);
-                    switch (opt)
-                    
-                        case 1:
-                            AddStudent(school, helper);
-                            break;
-                        case 2:
-                            AddMarks(school, helper);
-                            break;
-                        case 3:
-                            ShowProgress(school, helper);
-                            break;
-                        default:
-                            Console.WriteLine("Out of bounds. Please enter a number among the given options.");
-                            break;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input type. Please enter numerical input.");
+                    case 1:
+                        AddStudent(school);
+                        break;
+                    case 2:
+                        AddMarks(school);
+                        break;
+                    case 3:
+                        ShowProgress(school);
+                        break;
+                    case 4:
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Out of bounds. Please enter a number among the given options.");
+                        break;
                 }
             }
         }
@@ -80,9 +74,8 @@ namespace StudentManagement
         public void StartUp()
         {
             School school = new School();
-            school.SetSchoolName();
-            Helper helper = new Helper();
-            MainMenu(school, helper);
+            EnterSchoolName(school);
+            MainMenu(school);
         }
 
         static void Main()
