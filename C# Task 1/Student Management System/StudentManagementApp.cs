@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Student_Management_System
+namespace StudentManagement
 {
     class StudentManagementApp
     {
@@ -54,7 +54,7 @@ namespace Student_Management_System
                 {
                     int opt = Convert.ToInt32(strin);
                     switch (opt)
-                    {
+                    
                         case 1:
                             AddStudent(school, helper);
                             break;
