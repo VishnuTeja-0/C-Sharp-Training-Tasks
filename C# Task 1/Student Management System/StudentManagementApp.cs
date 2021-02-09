@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using StudentManagement.Models;
 
+
 namespace StudentManagement
 {
     class StudentManagementApp : Operations
@@ -20,7 +21,7 @@ namespace StudentManagement
         private void AddMarks(School school)
         {
             AddStudentMarks(school);
-            Console.WriteLine("Press Any Key to Continue");
+            cw("Press Any Key to Continue");
             Console.ReadKey(false);
             Console.Clear();
             PrintMenu(school);
@@ -32,7 +33,7 @@ namespace StudentManagement
             Student student = new Student();
             SetStudentDetails(school, student);
             school.AddStudent(student);
-            Console.WriteLine("Press Any Key to Continue");
+            cw("Press Any Key to Continue");
             Console.ReadKey(false);
             Console.Clear();
             PrintMenu(school);
@@ -64,7 +65,7 @@ namespace StudentManagement
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Out of bounds. Please enter a number among the given options.");
+                        cw("Out of bounds. Please enter a number among the given options.");
                         break;
                 }
             }

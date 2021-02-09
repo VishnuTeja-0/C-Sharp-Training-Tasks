@@ -8,12 +8,14 @@ namespace StudentManagement
 {
     class Helper
     {
+        public Action<string> cw = Console.WriteLine;
+
         public void PrintMenu(School school)
         {
-            Console.WriteLine("Welcome to " + school.GetSchoolName() + " School Student Information Management");
-            Console.WriteLine(new String('-', 50));
-            Console.WriteLine("1. Add student\n2. Add marks for student\n3. Show student progress card\n4. Quit Program\n");
-            Console.WriteLine("Please provide valid input from menu options :");
+            cw($"Welcome to {school.GetSchoolName()} School Student Information Management");
+            cw(new String('-', 50));
+            cw("1. Add student\n2. Add marks for student\n3. Show student progress card\n4. Quit Program\n");
+            cw("Please provide valid input from menu options :");
         }
 
         public string ValidTextInput()
@@ -29,12 +31,12 @@ namespace StudentManagement
                     }
                     else
                     {
-                        Console.WriteLine("Invalid Input. Input can only be alphabetical. Please try again.");
+                        cw("Invalid Input. Input can only be alphabetical. Please try again.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Input. Please enter alphabetical input.");
+                    cw("Invalid Input. Please enter alphabetical input.");
                 }
             }
         }
@@ -52,12 +54,12 @@ namespace StudentManagement
                     }
                     else
                     {
-                        Console.WriteLine("Invalid Input. Input can only be numerical. Please try again.");
+                        cw("Invalid Input. Input can only be numerical. Please try again.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Input. Please enter numerical input.");
+                    cw("Invalid Input. Please enter numerical input.");
                 }
             }
         }

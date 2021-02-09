@@ -10,24 +10,24 @@ namespace StudentManagement
     {
         public void EnterSchoolName(School school)
         {
-            Console.WriteLine("Enter The School Name: ");
+            cw("Enter The School Name: ");
             string userInput = ValidTextInput();
             school.SetSchoolName(userInput);
         }
 
         public void SetStudentDetails(School school, Student student)
         {
-            Console.WriteLine("Enter Student Roll number : ");
+            cw("Enter Student Roll number : ");
             int rollNo = ValidNumberInput();
             if (!school.GetStudentList().Any(i => i.GetRollNumber() == rollNo)){
-                Console.WriteLine("Enter Student Name : ");
+                cw("Enter Student Name : ");
                 string name = ValidTextInput();
                 student.SetStudentDetails(rollNo, name);
-                Console.WriteLine("Student details are added successfully\n");
+                cw("Student details are added successfully\n");
             }
             else
             {
-                Console.WriteLine("Student with given roll number already exists. Please try again.");
+                cw("Student with given roll number already exists. Please try again.");
                 return;
             }
             
@@ -35,11 +35,11 @@ namespace StudentManagement
 
         public void AddStudentMarks(School school)
         {
-            Console.WriteLine("Enter Student Roll number : ");
+            cw("Enter Student Roll number : ");
             int rollNo = ValidNumberInput();
             if (!school.GetStudentList().Any(i => i.GetRollNumber() == rollNo))
             {
-                Console.WriteLine("Student with given roll number does not exist. Please try again.\n");
+                cw("Student with given roll number does not exist. Please try again.\n");
                 return;
             }
             else
@@ -53,12 +53,12 @@ namespace StudentManagement
                     student.SetSubjectMarks(subject);
                 }
             }
-            Console.WriteLine("Student marks are added successfully\n");
+            cw("Student marks are added successfully\n");
         }
 
         public int EnterSubjectMarks(string subject)
         {
-            Console.WriteLine("Enter Marks scored in " + subject + " : ");
+            cw(String.Format("Enter Marks scored in {0} : ", subject));
             int marks;
             while (true)
             {
@@ -69,7 +69,7 @@ namespace StudentManagement
                 }
                 else
                 {
-                    Console.WriteLine("Please enter numerical input out of 100");
+                    cw("Please enter numerical input out of 100");
                 }
             }
             return marks;
@@ -77,43 +77,43 @@ namespace StudentManagement
 
         public void GenerateReportCard(School school)
         {
-            Console.WriteLine("Enter Student Roll Number : ");
+            cw("Enter Student Roll Number : ");
             int rollNo = ValidNumberInput();
             if (school.GetStudentList().Any(i => i.GetRollNumber() == rollNo))
             {
                 Student student = school.GetStudentList().FirstOrDefault(i => i.GetRollNumber() == rollNo);
                 if (student.GetSubjectMarks().Count() > 0)
                 {
-                    Console.WriteLine("Student Roll Number : " + rollNo);
-                    Console.WriteLine("Student Name : " + student.GetName());
-                    Console.WriteLine("Student Marks");
-                    Console.WriteLine("---------------");
+                    cw($"Student Roll Number : {rollNo}");
+                    cw($"Student Name : {student.GetName()}");
+                    cw("Student Marks");
+                    cw("---------------");
                     List<int> setOfMarks = new List<int>();
                     foreach(Subject subject in student.GetSubjectMarks())
                     {
-                        Console.WriteLine(subject.GetName() + " : " + subject.GetMarks());
+                        cw($"{subject.GetName()} : {subject.GetMarks()}");
                         setOfMarks.Add(subject.GetMarks());
                     }
-                    Console.WriteLine("---------------\n");
-                    Console.WriteLine("Total Marks : " + setOfMarks.Sum());
+                    cw("---------------\n");
+                    cw($"Total Marks : {setOfMarks.Sum()}");
                     double percentage = setOfMarks.Average();
-                    Console.WriteLine("Percentage : " + percentage);
-                    Console.WriteLine("---------------\n");
+                    cw($"Percentage : {percentage}");
+                    cw("---------------\n");
                 }
                 else
                 {
-                    Console.WriteLine("Student with given roll number does not have record of marks. Please try again\n");
-                    Console.WriteLine("Press Any Key to Continue");
+                    cw("Student with given roll number does not have record of marks. Please try again\n");
+                    cw("Press Any Key to Continue");
                     return;
                 }
             }
             else
             {
-                Console.WriteLine("Student with given roll number does not exist. Please try again.\n");
-                Console.WriteLine("Press Any Key to Continue");
+                cw("Student with given roll number does not exist. Please try again.\n");
+                cw("Press Any Key to Continue");
                 return;
             }
-            Console.WriteLine("Press any key to continue");
+            cw("Press any key to continue");
         }
     }
 }
