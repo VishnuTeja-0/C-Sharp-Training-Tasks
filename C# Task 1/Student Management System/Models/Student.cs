@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace StudentManagement.Models
 {
-    class Student
+    public class Student
     {
         private int _rollNo;
         private string _name;

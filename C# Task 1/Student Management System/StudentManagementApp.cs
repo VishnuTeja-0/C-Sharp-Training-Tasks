@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using StudentManagement.Models;
 
 
 namespace StudentManagement
 {
-    class StudentManagementApp : Operations
+    public class StudentManagementApp : Operations
     {
         // To perform operation of printing progress card of existing student with existing marks record
         private void ShowProgress(School school)
         {
             GenerateReportCard(school.GetStudentList());
-            Console.ReadKey(false);
-            Console.Clear();
-            PrintMenu(school.GetSchoolName());
+            DisplayMenu(school.GetSchoolName());
         }
 
         // To perform operation for adding marks for existing student
@@ -22,9 +18,7 @@ namespace StudentManagement
         {
             AddStudentMarks(school.GetStudentList(), school.GetSubjects());
             cw("Press Any Key to Continue");
-            Console.ReadKey(false);
-            Console.Clear();
-            PrintMenu(school.GetSchoolName());
+            DisplayMenu(school.GetSchoolName());
         }
 
         // To perform operation of adding new student details
@@ -34,9 +28,7 @@ namespace StudentManagement
             SetStudentDetails(school.GetStudentList(), student);
             school.AddStudent(student);
             cw("Press Any Key to Continue");
-            Console.ReadKey(false);
-            Console.Clear();
-            PrintMenu(school.GetSchoolName());
+            DisplayMenu(school.GetSchoolName());
         }
 
         // For printing main menu

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace StudentManagement.Models
 {
-    class School
+    public class School
     {
         private string _schoolName;
         private List<Student> _students;
