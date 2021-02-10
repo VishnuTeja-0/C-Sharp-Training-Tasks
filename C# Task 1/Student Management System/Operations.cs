@@ -15,11 +15,11 @@ namespace StudentManagement
             school.SetSchoolName(userInput);
         }
 
-        public void SetStudentDetails(School school, Student student)
+        public void SetStudentDetails(List<Student> studentList, Student student)
         {
             cw("Enter Student Roll number : ");
             int rollNo = ValidNumberInput();
-            if (!school.GetStudentList().Any(i => i.GetRollNumber() == rollNo)){
+            if (!studentList.Any(i => i.GetRollNumber() == rollNo)){
                 cw("Enter Student Name : ");
                 string name = ValidTextInput();
                 student.SetStudentDetails(rollNo, name);
@@ -33,19 +33,19 @@ namespace StudentManagement
             
         }
 
-        public void AddStudentMarks(School school)
+        public void AddStudentMarks(List<Student> studentList, List<string> subjectList)
         {
             cw("Enter Student Roll number : ");
             int rollNo = ValidNumberInput();
-            if (!school.GetStudentList().Any(i => i.GetRollNumber() == rollNo))
+            if (!studentList.Any(i => i.GetRollNumber() == rollNo))
             {
                 cw("Student with given roll number does not exist. Please try again.\n");
                 return;
             }
             else
             {
-                Student student = school.GetStudentList().FirstOrDefault(i => i.GetRollNumber() == rollNo);
-                foreach (string subjectname in school.GetSubjects())
+                Student student = studentList.FirstOrDefault(i => i.GetRollNumber() == rollNo);
+                foreach (string subjectname in subjectList)
                 {
                     Subject subject = new Subject();
                     subject.SetName(subjectname);
@@ -75,13 +75,13 @@ namespace StudentManagement
             return marks;
         }
 
-        public void GenerateReportCard(School school)
+        public void GenerateReportCard(List<Student> studentList)
         {
             cw("Enter Student Roll Number : ");
             int rollNo = ValidNumberInput();
-            if (school.GetStudentList().Any(i => i.GetRollNumber() == rollNo))
+            if (studentList.Any(i => i.GetRollNumber() == rollNo))
             {
-                Student student = school.GetStudentList().FirstOrDefault(i => i.GetRollNumber() == rollNo);
+                Student student = studentList.FirstOrDefault(i => i.GetRollNumber() == rollNo);
                 if (student.GetSubjectMarks().Count() > 0)
                 {
                     cw($"Student Roll Number : {rollNo}");

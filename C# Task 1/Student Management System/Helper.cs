@@ -10,9 +10,9 @@ namespace StudentManagement
     {
         public Action<string> cw = Console.WriteLine;
 
-        public void PrintMenu(School school)
+        public void PrintMenu(string schoolName)
         {
-            cw($"Welcome to {school.GetSchoolName()} School Student Information Management");
+            cw($"Welcome to {schoolName} School Student Information Management");
             cw(new String('-', 50));
             cw("1. Add student\n2. Add marks for student\n3. Show student progress card\n4. Quit Program\n");
             cw("Please provide valid input from menu options :");

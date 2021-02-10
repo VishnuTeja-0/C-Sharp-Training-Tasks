@@ -11,32 +11,32 @@ namespace StudentManagement
         // To perform operation of printing progress card of existing student with existing marks record
         private void ShowProgress(School school)
         {
-            GenerateReportCard(school);
+            GenerateReportCard(school.GetStudentList());
             Console.ReadKey(false);
             Console.Clear();
-            PrintMenu(school);
+            PrintMenu(school.GetSchoolName());
         }
 
         // To perform operation for adding marks for existing student
         private void AddMarks(School school)
         {
-            AddStudentMarks(school);
+            AddStudentMarks(school.GetStudentList(), school.GetSubjects());
             cw("Press Any Key to Continue");
             Console.ReadKey(false);
             Console.Clear();
-            PrintMenu(school);
+            PrintMenu(school.GetSchoolName());
         }
 
         // To perform operation of adding new student details
         private void AddStudent(School school)
         {
             Student student = new Student();
-            SetStudentDetails(school, student);
+            SetStudentDetails(school.GetStudentList(), student);
             school.AddStudent(student);
             cw("Press Any Key to Continue");
             Console.ReadKey(false);
             Console.Clear();
-            PrintMenu(school);
+            PrintMenu(school.GetSchoolName());
         }
 
         // For printing main menu
@@ -46,7 +46,7 @@ namespace StudentManagement
         private void MainMenu(School school)
         {
             Console.Clear();
-            PrintMenu(school);
+            PrintMenu(school.GetSchoolName());
             while (true)
             {
                 int option = ValidNumberInput();
