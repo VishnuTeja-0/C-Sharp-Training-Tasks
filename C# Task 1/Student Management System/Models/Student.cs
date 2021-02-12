@@ -5,8 +5,6 @@ namespace StudentManagement.Models
     public class Student
     {
         private int _rollNo;
-        private string _name;
-        private List<Subject> _subjects;
 
         public int RollNo
         {
@@ -14,11 +12,15 @@ namespace StudentManagement.Models
             set { _rollNo = value; }
         }
 
+        private string _name;
+
         public string Name
         {
             get { return _name; }
             set { _name = value; }
         }
+
+        private List<Subject> _subjects;
 
         public List<Subject> Subjects
         {

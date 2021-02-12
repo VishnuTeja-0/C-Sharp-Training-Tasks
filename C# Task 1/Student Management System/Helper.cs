@@ -5,7 +5,7 @@ namespace StudentManagement
     public static class Helper
     {
 
-        public static string TakeValidTextInput()
+        public static string ValidateTextInput()
         {
             while (true)
             {
@@ -21,7 +21,7 @@ namespace StudentManagement
             }
         }
 
-        public static int TakeValidNumberInput()
+        public static int ValidateNumberInput()
         {
             while (true)
             {
