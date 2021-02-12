@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using StudentManagement.Models;
 
 namespace StudentManagement
@@ -23,7 +22,7 @@ namespace StudentManagement
             student.RollNo = rollNo;
             student.Name = name;
             student.Subjects = new List<Subject>();
-            _school.AddStudent(student);
+            _school.Students.Add(student);
         }
 
         public void AddStudentMarks(int rollNo, List<Subject> subjects)
@@ -31,7 +30,6 @@ namespace StudentManagement
             Student student = _school.Students.GetStudentByRollNumber(rollNo);
             student.Subjects = subjects;
         }
-
 
         public List<Subject> GenerateReportCard(int rollNo)
         {
@@ -44,7 +42,7 @@ namespace StudentManagement
             return _school.Students.GetStudentByRollNumber(rollNo);
         }
 
-        public bool IsStudentExisting(int rollNo)
+        public bool IsStudentAvailable(int rollNo)
         {
             return _school.Students.IsStudentExisting(rollNo);
         }
