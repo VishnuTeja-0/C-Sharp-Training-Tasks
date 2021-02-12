@@ -3,27 +3,20 @@ namespace StudentManagement.Models
 {
     public class Subject
     {
-        private string _subjectName;
+
+        private string _name;
         private int _marks;
 
-        public void SetName(string name)
+        public string Name
         {
-            _subjectName = name;
+            get { return _name; }
+            set { _name = value; }
         }
 
-        public void SetMarks(int marks)
+        public int Marks
         {
-            _marks = marks;
-        }
-
-        public string GetName()
-        {
-            return _subjectName;
-        }
-
-        public int GetMarks()
-        {
-            return _marks;
+            get { return _marks; }
+            set { _marks = value; }
         }
     }
 }

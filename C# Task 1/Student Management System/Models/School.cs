@@ -4,23 +4,20 @@ namespace StudentManagement.Models
 {
     public class School
     {
-        private string _schoolName;
+        private string _name;
         private List<Student> _students;
         private List<string> _subjects = new List<string> { "Telugu", "Hindi", "English", "Maths", "Science", "Social" };
 
-        public School()
+        public string Name
         {
-            _students = new List<Student>();
+            get { return _name; }
+            set { _name = value; }
         }
 
-        public void SetSchoolName(string name)
+        public List<Student> Students
         {
-            _schoolName = name;
-        }
-
-        public void AddSubject(string subject)
-        {
-            _subjects.Add(subject);
+            get { return _students; }
+            set { _students = value;  }
         }
 
         public void AddStudent(Student student)
@@ -28,20 +25,16 @@ namespace StudentManagement.Models
             _students.Add(student);
         }
 
-        public List<Student> GetStudentList()
+        public List<string> Subjects
         {
-            return _students;
+            get { return _subjects; }
         }
 
-        public string GetSchoolName()
+        public void AddSubject(string subject)
         {
-            return _schoolName;
+            _subjects.Add(subject);
         }
 
-        public List<string> GetSubjects()
-        {
-            return _subjects;
-        }
 
     }
 }
