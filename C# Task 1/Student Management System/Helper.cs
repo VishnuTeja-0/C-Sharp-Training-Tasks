@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using StudentManagement.Models;
 
 namespace StudentManagement
 {
-    class Helper
+    public class Helper
     {
         public Action<string> cw = Console.WriteLine;
 
@@ -25,7 +21,7 @@ namespace StudentManagement
                 string userInput = Console.ReadLine();
                 if (!string.IsNullOrEmpty(userInput))
                 {
-                    if (userInput.All(char.IsLetter))
+                    if (userInput.IsAlphabetical())
                     {
                         return userInput;
                     }
@@ -48,7 +44,7 @@ namespace StudentManagement
                 string userInput = Console.ReadLine();
                 if (!string.IsNullOrEmpty(userInput))
                 {
-                    if (userInput.All(char.IsDigit))
+                    if (userInput.IsNumerical())
                     {
                         return Int32.Parse(userInput);
                     }
@@ -62,6 +58,13 @@ namespace StudentManagement
                     cw("Invalid Input. Please enter numerical input.");
                 }
             }
+        }
+
+        public void DisplayMenu(string schoolName)
+        {
+            Console.ReadKey(false);
+            Console.Clear();
+            PrintMenu(schoolName);
         }
     }
 }

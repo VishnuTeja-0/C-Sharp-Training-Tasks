@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace StudentManagement.Models
 {
-    class Subject
+    public class Subject
     {
         private string _subjectName;
         private int _marks;

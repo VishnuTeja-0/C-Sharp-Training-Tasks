@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using StudentManagement.Models;
 
 namespace StudentManagement
 {
-    class Operations : Helper
+    public class Operations : Helper
     {
         public void EnterSchoolName(School school)
         {
@@ -19,7 +18,7 @@ namespace StudentManagement
         {
             cw("Enter Student Roll number : ");
             int rollNo = ValidNumberInput();
-            if (!studentList.Any(i => i.GetRollNumber() == rollNo)){
+            if (!studentList.StudentExists(rollNo)){
                 cw("Enter Student Name : ");
                 string name = ValidTextInput();
                 student.SetStudentDetails(rollNo, name);
@@ -37,14 +36,9 @@ namespace StudentManagement
         {
             cw("Enter Student Roll number : ");
             int rollNo = ValidNumberInput();
-            if (!studentList.Any(i => i.GetRollNumber() == rollNo))
+            if (studentList.StudentExists(rollNo))
             {
-                cw("Student with given roll number does not exist. Please try again.\n");
-                return;
-            }
-            else
-            {
-                Student student = studentList.FirstOrDefault(i => i.GetRollNumber() == rollNo);
+                Student student = studentList.GetStudentByRollNumber(rollNo);
                 foreach (string subjectname in subjectList)
                 {
                     Subject subject = new Subject();
@@ -52,6 +46,12 @@ namespace StudentManagement
                     subject.SetMarks(EnterSubjectMarks(subjectname));
                     student.SetSubjectMarks(subject);
                 }
+            }
+            else
+            {
+                cw("Student with given roll number does not exist. Please try again.\n");
+                return;
+                
             }
             cw("Student marks are added successfully\n");
         }
@@ -79,9 +79,9 @@ namespace StudentManagement
         {
             cw("Enter Student Roll Number : ");
             int rollNo = ValidNumberInput();
-            if (studentList.Any(i => i.GetRollNumber() == rollNo))
+            if (studentList.StudentExists(rollNo))
             {
-                Student student = studentList.FirstOrDefault(i => i.GetRollNumber() == rollNo);
+                Student student = studentList.GetStudentByRollNumber(rollNo);
                 if (student.GetSubjectMarks().Count() > 0)
                 {
                     cw($"Student Roll Number : {rollNo}");
@@ -96,8 +96,7 @@ namespace StudentManagement
                     }
                     cw("---------------\n");
                     cw($"Total Marks : {setOfMarks.Sum()}");
-                    double percentage = setOfMarks.Average();
-                    cw($"Percentage : {percentage}");
+                    cw($"Percentage : {setOfMarks.Average()}");
                     cw("---------------\n");
                 }
                 else
