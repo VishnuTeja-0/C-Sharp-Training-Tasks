@@ -2,69 +2,39 @@
 
 namespace StudentManagement
 {
-    public class Helper
+    public static class Helper
     {
-        public Action<string> cw = Console.WriteLine;
 
-        public void PrintMenu(string schoolName)
-        {
-            cw($"Welcome to {schoolName} School Student Information Management");
-            cw(new String('-', 50));
-            cw("1. Add student\n2. Add marks for student\n3. Show student progress card\n4. Quit Program\n");
-            cw("Please provide valid input from menu options :");
-        }
-
-        public string ValidTextInput()
+        public static string TakeValidTextInput()
         {
             while (true)
             {
                 string userInput = Console.ReadLine();
-                if (!string.IsNullOrEmpty(userInput))
+                if (!string.IsNullOrEmpty(userInput) && userInput.IsAlphabetical())
                 {
-                    if (userInput.IsAlphabetical())
-                    {
-                        return userInput;
-                    }
-                    else
-                    {
-                        cw("Invalid Input. Input can only be alphabetical. Please try again.");
-                    }
+                    return userInput;
                 }
                 else
                 {
-                    cw("Invalid Input. Please enter alphabetical input.");
+                    Console.WriteLine("Invalid Input. Please enter alphabetical input.");
                 }
             }
         }
 
-        public int ValidNumberInput()
+        public static int TakeValidNumberInput()
         {
             while (true)
             {
                 string userInput = Console.ReadLine();
-                if (!string.IsNullOrEmpty(userInput))
+                if (!string.IsNullOrEmpty(userInput) && Int32.TryParse(userInput, out int num))
                 {
-                    if (userInput.IsNumerical())
-                    {
-                        return Int32.Parse(userInput);
-                    }
-                    else
-                    {
-                        cw("Invalid Input. Input can only be numerical. Please try again.");
-                    }
+                    return num;
                 }
                 else
                 {
-                    cw("Invalid Input. Please enter numerical input.");
+                    Console.WriteLine("Invalid Input. Please enter alphabetical input.");
                 }
             }
-        }
-
-        public void DisplayMenu(string schoolName)
-        {
-            Console.ReadKey(false);
-            Console.Clear();
-            PrintMenu(schoolName);
         }
     }
 }

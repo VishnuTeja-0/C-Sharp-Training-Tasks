@@ -6,38 +6,26 @@ namespace StudentManagement.Models
     {
         private int _rollNo;
         private string _name;
-        List<Subject> _subjectMarks;
+        private List<Subject> _subjects;
 
-        public Student()
+        public int RollNo
         {
-            _subjectMarks = new List<Subject>();
+            get { return _rollNo; }
+            set { _rollNo = value; }
         }
 
-        public void SetStudentDetails(int rollNo, string name)
+        public string Name
         {
-            _rollNo = rollNo;
-            _name = name;
+            get { return _name; }
+            set { _name = value; }
         }
 
-        public void SetSubjectMarks(Subject subject)
+        public List<Subject> Subjects
         {
-            _subjectMarks.Add(subject);
+            get { return _subjects; }
+            set { _subjects = value; }
         }
 
-        public int GetRollNumber()
-        {
-            return _rollNo;
-        }
-
-        public string GetName()
-        {
-            return _name;
-        }
-
-        public List<Subject> GetSubjectMarks()
-        {
-            return _subjectMarks;
-        }
     }
 }
 
