@@ -45,7 +45,7 @@ namespace StudentManagement
             {
                 Console.WriteLine("Student with given roll number does not exist. Please try again.\n");
             }
-            AfterOperation(schoolName);
+            ReturnToMainMenu(schoolName);
         }
 
         // To perform operation for adding marks for existing student
@@ -71,7 +71,7 @@ namespace StudentManagement
             {
                 Console.WriteLine("Student with given roll number does not exist. Please try again.\n");
             }
-            AfterOperation(schoolName);
+            ReturnToMainMenu(schoolName);
         }
 
         // To perform operation of adding new student details
@@ -91,11 +91,8 @@ namespace StudentManagement
             {
                 Console.WriteLine("Student with give roll number already exists. Please try again.\n");
             }
-            AfterOperation(schoolName);
+            ReturnToMainMenu(schoolName);
         }
-
-        // For printing main menu
-        
 
         // For main student management options
         private void MainMenu(string schoolName)
@@ -134,7 +131,7 @@ namespace StudentManagement
             Console.WriteLine("Please provide valid input from menu options :");
         }
 
-        public void AfterOperation(string schoolName)
+        public void ReturnToMainMenu(string schoolName)
         {
             Console.WriteLine("Press Any Key to Continue");
             Console.ReadKey(false);
