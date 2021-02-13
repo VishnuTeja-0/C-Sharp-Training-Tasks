@@ -5,8 +5,6 @@ namespace StudentManagement.Models
     public class School
     {
         private string _name;
-        private List<Student> _students;
-        private List<string> _subjects = new List<string> { "Telugu", "Hindi", "English", "Maths", "Science", "Social" };
 
         public string Name
         {
@@ -14,27 +12,20 @@ namespace StudentManagement.Models
             set { _name = value; }
         }
 
+        private List<Student> _students;
+
         public List<Student> Students
         {
             get { return _students; }
-            set { _students = value;  }
+            set { _students = value; }
         }
 
-        public void AddStudent(Student student)
-        {
-            _students.Add(student);
-        }
+        private List<string> _subjects = new List<string> { "Telugu", "Hindi", "English", "Maths", "Science", "Social" };
 
         public List<string> Subjects
         {
             get { return _subjects; }
+            set { _subjects = value; }
         }
-
-        public void AddSubject(string subject)
-        {
-            _subjects.Add(subject);
-        }
-
-
     }
 }

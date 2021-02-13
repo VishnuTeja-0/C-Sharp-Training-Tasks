@@ -5,13 +5,14 @@ namespace StudentManagement.Models
     {
 
         private string _name;
-        private int _marks;
 
         public string Name
         {
             get { return _name; }
             set { _name = value; }
         }
+
+        private int _marks;
 
         public int Marks
         {
