@@ -94,25 +94,33 @@ namespace StudentManagement
             ReturnToMainMenu(schoolName);
         }
 
+        public enum SchoolOperations
+        {
+            Add_Student = 1,
+            Add_Marks,
+            Show_Progress,
+            Quit_Program
+        }
+
         // For main student management options
         private void MainMenu(string schoolName)
         {
             DisplayMenu(schoolName);
             while (true)
             {
-                int option = Helper.ValidateNumberInput();
+                SchoolOperations option = (SchoolOperations)Helper.ValidateNumberInput();
                 switch (option)
                 {
-                    case 1:
+                    case SchoolOperations.Add_Student:
                         AddStudent(schoolName);
                         break;
-                    case 2:
+                    case SchoolOperations.Add_Marks:
                         AddMarks(schoolName);
                         break;
-                    case 3:
+                    case SchoolOperations.Show_Progress:
                         ShowProgress(schoolName);
                         break;
-                    case 4:
+                    case SchoolOperations.Quit_Program:
                         Environment.Exit(0);
                         break;
                     default:

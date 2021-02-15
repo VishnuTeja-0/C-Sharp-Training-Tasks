@@ -20,12 +20,14 @@ namespace StudentManagement.Models
             set { _students = value; }
         }
 
-        private List<string> _subjects = new List<string> { "Telugu", "Hindi", "English", "Maths", "Science", "Social" };
-
-        public List<string> Subjects
+        public enum Subjects
         {
-            get { return _subjects; }
-            set { _subjects = value; }
+            Telugu,
+            English,
+            Hindi,
+            Maths,
+            Science,
+            Social
         }
     }
 }
