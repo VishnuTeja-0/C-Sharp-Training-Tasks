@@ -4,9 +4,9 @@ namespace StudentManagement.Models
     public class Subject
     {
 
-        private string _name;
+        private School.Subjects _name;
 
-        public string Name
+        public School.Subjects Name
         {
             get { return _name; }
             set { _name = value; }
