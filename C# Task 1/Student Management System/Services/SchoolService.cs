@@ -47,9 +47,5 @@ namespace StudentManagement
             return _school.Students.IsStudentExisting(rollNo);
         }
 
-        public string[] GetSubjects()
-        {
-            return Enum.GetNames(typeof(School.Subjects));
-        }
     }
 }
