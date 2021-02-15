@@ -47,9 +47,5 @@ namespace StudentManagement
             return _school.Students.IsStudentExisting(rollNo);
         }
 
-        public List<string> GetSubjects()
-        {
-            return _school.Subjects;
-        }
     }
 }

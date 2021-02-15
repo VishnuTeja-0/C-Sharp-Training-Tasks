@@ -32,7 +32,7 @@ namespace StudentManagement
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Input. Please enter alphabetical input.");
+                    Console.WriteLine("Invalid Input. Please enter numerical input.");
                 }
             }
         }

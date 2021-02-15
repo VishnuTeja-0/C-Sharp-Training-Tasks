@@ -56,7 +56,7 @@ namespace StudentManagement
             if (_schoolService.IsStudentAvailable(rollNo))
             {
                 List<Subject> subjects = new List<Subject>();
-                foreach (string subjectName in _schoolService.GetSubjects())
+                foreach (School.Subjects subjectName in Enum.GetValues(typeof(School.Subjects)))
                 {
                     Subject subject = new Subject();
                     subject.Name = subjectName;
@@ -94,25 +94,33 @@ namespace StudentManagement
             ReturnToMainMenu(schoolName);
         }
 
+        public enum SchoolOperations
+        {
+            AddStudent = 1,
+            AddMarks,
+            ShowProgress,
+            QuitProgram
+        }
+
         // For main student management options
         private void MainMenu(string schoolName)
         {
             DisplayMenu(schoolName);
             while (true)
             {
-                int option = Helper.ValidateNumberInput();
+                SchoolOperations option = (SchoolOperations)Helper.ValidateNumberInput();
                 switch (option)
                 {
-                    case 1:
+                    case SchoolOperations.AddStudent:
                         AddStudent(schoolName);
                         break;
-                    case 2:
+                    case SchoolOperations.AddMarks:
                         AddMarks(schoolName);
                         break;
-                    case 3:
+                    case SchoolOperations.ShowProgress:
                         ShowProgress(schoolName);
                         break;
-                    case 4:
+                    case SchoolOperations.QuitProgram:
                         Environment.Exit(0);
                         break;
                     default:
