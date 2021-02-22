@@ -1,0 +1,13 @@
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\bin\Debug\netcoreapp3.1\BankManagement.exe
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\bin\Debug\netcoreapp3.1\BankManagement.deps.json
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\bin\Debug\netcoreapp3.1\BankManagement.runtimeconfig.json
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\bin\Debug\netcoreapp3.1\BankManagement.runtimeconfig.dev.json
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\bin\Debug\netcoreapp3.1\BankManagement.dll
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\bin\Debug\netcoreapp3.1\BankManagement.pdb
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\obj\Debug\netcoreapp3.1\BankManagement.csprojAssemblyReference.cache
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\obj\Debug\netcoreapp3.1\BankManagement.AssemblyInfoInputs.cache
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\obj\Debug\netcoreapp3.1\BankManagement.AssemblyInfo.cs
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\obj\Debug\netcoreapp3.1\BankManagement.csproj.CoreCompileInputs.cache
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\obj\Debug\netcoreapp3.1\BankManagement.dll
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\obj\Debug\netcoreapp3.1\BankManagement.pdb
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\obj\Debug\netcoreapp3.1\BankManagement.genruntimeconfig.cache

@@ -6,10 +6,10 @@ namespace BankManagement.Models
 {
     public class BankAccount
     {
-        private int _id { get; set; }
-        private string _username { get; set; }
-        private string _password { get; set; }
-        private int _balance { get; set; }
+        public int Id { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public int Balance { get; set; }
 
     }
 }
