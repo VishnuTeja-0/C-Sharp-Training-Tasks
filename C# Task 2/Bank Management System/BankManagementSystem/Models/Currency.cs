@@ -4,10 +4,10 @@ using System.Text;
 
 namespace BankManagement.Models
 {
-    class Currency
+    public class Currency
     {
-        private string _name { get; set; }
-        private string _code { get; set; }
-        private double _exchangeRate { get; set; }
+        public string Name { get; set; }
+        public string Code { get; set; }
+        public double ExchangeRate { get; set; }
     }
 }
