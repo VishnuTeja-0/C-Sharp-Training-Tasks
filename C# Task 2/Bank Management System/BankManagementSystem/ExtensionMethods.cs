@@ -12,14 +12,14 @@ namespace BankManagement
             return str.All(char.IsLetter);
         }
 
-        public static Models.Bank GetBankByName(this List<Models.Bank> banks, string bankName)
+        public static Models.Bank GetBankById(this List<Models.Bank> banks, string bankId)
         {
-            return banks.FirstOrDefault(i => i.Name == bankName);
+            return banks.FirstOrDefault(i => i.Id == bankId);
         }
 
-        public static Models.BankAccount GetAccount(this List<Models.BankAccount> bankAccounts, string username)
+        public static Models.BankAccount GetAccountById(this List<Models.BankAccount> bankAccounts, string accountId)
         {
-            return bankAccounts.FirstOrDefault(i => i.Username == username);
+            return bankAccounts.FirstOrDefault(i => i.Id == accountId);
         }
     }
 }

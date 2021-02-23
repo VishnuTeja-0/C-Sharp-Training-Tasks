@@ -10,35 +10,46 @@ namespace BankManagement.Services
     {
         List<Bank> _banks = new List<Bank>();
 
-        public void SetupBank(string bankName, string staffUsername, string staffPassword)
+        public void CreateBank(string bankName, string staffUsername, string staffPassword)
         {
-            Bank bank = new Bank();
-            bank.Name = bankName;
-            bank.StaffUsername = staffUsername;
-            bank.StaffPassword = staffPassword;
+            Bank bank = new Bank
+            {
+                Name = bankName,
+                Id = $"{bankName.Substring(0, 3)}{DateTime.Today}",
+                StaffUsername = staffUsername,
+                StaffPassword = staffPassword
+            };
             _banks.Add(bank);
-            AddCurrency(bankName, "Indian Rupee", "INR", 1);
+            AddCurrency(bank.Id, "Indian Rupee", "INR", 1);
 
         }
 
-        public void CreateAccount(string bankName, string newUsername, string newPassword)
+        public void CreateAccount(string bankId, string newName, string newUsername, string newPassword)
         {
             BankAccount bankAccount = new BankAccount
             {
+                Id = $"{newName.Substring(0, 3)}{DateTime.Today}",
+                Name = newName,
                 Username = newUsername,
                 Password = newPassword
             };
-            _banks.GetBankByName(bankName).Accounts.Add(bankAccount);
+            _banks.GetBankById(bankId).Accounts.Add(bankAccount);
         }
 
-        public void UpdateAccount(string bankName, string newUsername, string newPassword)
+        public void UpdateAccount(string bankId, string accountId, string newName, string newUsername, string newPassword)
         {
-
+            BankAccount account = _banks.GetBankById(bankId).Accounts.GetAccountById(accountId);
+            account.Name = newName;
+            account.Username = newUsername;
+            account.Password = newPassword;
         }
 
+        public void DeleteAccount(string bankId, string accountId)
+        {
+            _banks.GetBankById(bankId).Accounts.RemoveAll(i => i.Id == accountId);
+        }
 
-
-        public void AddCurrency(string bankName, string currencyName, string currencyCode, int exchangeRate)
+        public void AddCurrency(string bankId, string currencyName, string currencyCode, double exchangeRate)
         {
             Currency curr = new Currency
             {
@@ -46,7 +57,16 @@ namespace BankManagement.Services
                 Code = currencyCode,
                 ExchangeRate = exchangeRate
             };
-            _banks.GetBankByName(bankName).Currencies.Add(curr);
+            _banks.GetBankById(bankId).Currencies.Add(curr);
+        }
+
+        public void UpdateServiceCharges(string bankId, double newSameRTGS, double newSameIMPS, double newDiffRTGS, double newDiffIMPS)
+        {
+            Bank bank = _banks.GetBankById(bankId);
+            bank.SameRTGS = newSameRTGS;
+            bank.SameIMPS = newSameIMPS;
+            bank.DiffRTGS = newDiffRTGS;
+            bank.DiffIMPS = newDiffIMPS;
         }
 
         public bool IsBankAvailable(string bankName)
@@ -54,30 +74,49 @@ namespace BankManagement.Services
             return _banks.Any(i => i.Name == bankName);
         }
 
-        public string GetBankName(int bankOption)
+        public List<string> GetBanks()
         {
-            return _banks[bankOption - 1].Name;
+            List<string> bankNames = new List<string>();
+            foreach(Bank bank in _banks)
+            {
+                bankNames.Add(bank.Name);
+            }
+            return bankNames;
         }
 
-        public bool IsStaff(int bankOption, string usernameInput)
+        public string GetBanks(string bankId)
         {
-            return _banks[bankOption - 1].StaffUsername == usernameInput;
-        }
-        public bool IsValidStaffPassword(int bankOption, string passwordInput)
-        {
-            return _banks[bankOption - 1].StaffPassword == passwordInput;
+            return _banks.GetBankById(bankId).Name;
         }
 
-        public bool IsAccountHolder(string bankName, string usernameInput)
+        public string GetBankId(int bankOption)
         {
-            Bank bank = _banks.GetBankByName(bankName);
-            return bank.Accounts.Any(i => i.Username == usernameInput);
+            return _banks[bankOption - 1].Id;
         }
 
-        public bool IsValidAccountPassword(int bankOption, string usernameInput, string passwordInput)
+        public bool IsStaff(string bankId, string usernameInput)
         {
-            BankAccount bankAccount = _banks[bankOption - 1].Accounts.GetAccount(usernameInput);
+            return _banks.GetBankById(bankId).StaffUsername == usernameInput;
+        }
+        public bool IsValidStaffPassword(string bankId, string passwordInput)
+        {
+            return _banks.GetBankById(bankId).StaffPassword == passwordInput;
+        }
+
+        public bool IsAccountHolder(string bankId, string usernameInput)
+        {
+            return _banks.GetBankById(bankId).Accounts.Any(i => i.Username == usernameInput);
+        }
+
+        public bool IsValidAccountPassword(string bankId, string usernameInput, string passwordInput)
+        {
+            BankAccount bankAccount = _banks.GetBankById(bankId).Accounts.GetAccount(usernameInput);
             return bankAccount.Password == passwordInput;
+        }
+
+        public bool IsAccountAvailable(string bankId, string accountId)
+        {
+            return _banks.GetBankById(bankId).Accounts.Any(i => i.Id == accountId);
         }
 
 

@@ -5,7 +5,7 @@ namespace BankManagement
     public static class Helper
     {
 
-        public static string ValidateTextInput()
+        public static string TextInput()
         {
             while (true)
             {
@@ -21,7 +21,7 @@ namespace BankManagement
             }
         }
 
-        public static int ValidateNumberInput()
+        public static int NumberInput()
         {
             while (true)
             {
@@ -33,6 +33,22 @@ namespace BankManagement
                 else
                 {
                     Console.WriteLine("Invalid Input. Please enter numerical input.");
+                }
+            }
+        }
+
+        public static double DecimalInput()
+        {
+            while (true)
+            {
+                string userInput = Console.ReadLine();
+                if (!string.IsNullOrEmpty(userInput) && Double.TryParse(userInput, out double num))
+                {
+                    return num;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input. Please enter numerical / decimal input.");
                 }
             }
         }
