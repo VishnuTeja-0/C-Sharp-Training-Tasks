@@ -7,7 +7,7 @@ namespace BankManagement.Models
     public class Bank
     {
         public string Name { get; set; }
-        public int Id { get; set; }
+        public string Id { get; set; }
         public double SameRTGS { get; set; } = 0;
         public double SameIMPS { get; set; } = 0.05;
         public double DiffRTGS { get; set; } = 0.02;
