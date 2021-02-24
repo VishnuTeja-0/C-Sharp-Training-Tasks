@@ -15,7 +15,13 @@ namespace BankManagement.Services
             Bank bank = new Bank
             {
                 Name = bankName,
-                Id = $"{bankName.Substring(0, 3)}{DateTime.Today}",
+                Id = $"{bankName.Substring(0, 3)}{DateTime.Now}",
+                SameRTGS = 0,
+                SameIMPS = 0.05,
+                DiffRTGS = 0.02,
+                DiffIMPS = 0.06,
+                Accounts = new List<BankAccount>(),
+                Currencies = new List<Currency>(),
                 StaffUsername = staffUsername,
                 StaffPassword = staffPassword
             };
@@ -24,14 +30,17 @@ namespace BankManagement.Services
 
         }
 
+        // Staff Functions
+
         public void CreateAccount(string bankId, string newName, string newUsername, string newPassword)
         {
             BankAccount bankAccount = new BankAccount
             {
-                Id = $"{newName.Substring(0, 3)}{DateTime.Today}",
+                Id = $"{newName.Substring(0, 3)}{DateTime.Now}",
                 Name = newName,
                 Username = newUsername,
-                Password = newPassword
+                Password = newPassword,
+                Transactions = new List<Transaction>()
             };
             _banks.GetBankById(bankId).Accounts.Add(bankAccount);
         }
@@ -68,6 +77,27 @@ namespace BankManagement.Services
             bank.DiffRTGS = newDiffRTGS;
             bank.DiffIMPS = newDiffIMPS;
         }
+
+        // Account Functions
+
+        public void DepositAmount(string bankId, string accountId, double amount, string currencyCode)
+        {
+            Bank bank = _banks.GetBankById(bankId);
+            if (currencyCode != "INR")
+            {
+                amount *= bank.Currencies.FirstOrDefault(i => i.Code == currencyCode).ExchangeRate;
+            }
+            BankAccount account = bank.Accounts.GetAccountById(accountId);
+            account.Balance += amount;
+        }
+
+        public void WithdrawAmount(string bankId, string accountId, double amount)
+        {
+            BankAccount account = _banks.GetBankById(bankId).Accounts.GetAccountById(accountId);
+            account.Balance -= amount;
+        }
+
+        // Service Functions
 
         public bool IsBankAvailable(string bankName)
         {
@@ -110,7 +140,7 @@ namespace BankManagement.Services
 
         public bool IsValidAccountPassword(string bankId, string usernameInput, string passwordInput)
         {
-            BankAccount bankAccount = _banks.GetBankById(bankId).Accounts.GetAccount(usernameInput);
+            BankAccount bankAccount = _banks.GetBankById(bankId).Accounts.FirstOrDefault(i => i.Username == usernameInput);
             return bankAccount.Password == passwordInput;
         }
 
@@ -119,6 +149,25 @@ namespace BankManagement.Services
             return _banks.GetBankById(bankId).Accounts.Any(i => i.Id == accountId);
         }
 
+        public string GetAccountId(string bankId, string username)
+        {
+            return _banks.GetBankById(bankId).Accounts.FirstOrDefault(i => i.Name == username).Id;
+        }
+
+        public string GetAccountName(string bankId, string accountId)
+        {
+            return _banks.GetBankById(bankId).Accounts.GetAccountById(accountId).Name;
+        }
+
+        public bool IsCurrencyAvailable(string bankId, string accountId, string currencyCode)
+        {
+            return _banks.GetBankById(bankId).Currencies.Any(i => i.Code == currencyCode);
+        }
+
+        public double GetAccountBalance(string bankId, string accountId)
+        {
+            return _banks.GetBankById(bankId).Accounts.GetAccountById(accountId).Balance;
+        }
 
     }
 }
