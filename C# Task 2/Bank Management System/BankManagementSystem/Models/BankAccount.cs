@@ -10,8 +10,8 @@ namespace BankManagement.Models
         public string Name { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public int Balance { get; set; }
-        public List<string> Transactions { get; set; }
+        public double Balance { get; set; }
+        public List<Transaction> Transactions { get; set; }
 
     }
 }

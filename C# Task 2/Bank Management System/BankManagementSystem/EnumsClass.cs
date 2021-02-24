@@ -4,14 +4,17 @@ using System.Text;
 
 namespace BankManagement
 {
-    public static class EnumsClass
+
+    public  class EnumsClass
     {
+
         public enum BankOperations
         {
             SetupBank = 1,
             Login,
             Exit
         }
+
 
         public enum StaffOperations
         {
