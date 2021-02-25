@@ -8,13 +8,13 @@ namespace BankManagement.Models
     {
         public string Name { get; set; }
         public string Id { get; set; }
-        public double SameRTGS { get; set; } = 0;
-        public double SameIMPS { get; set; } = 0.05;
-        public double DiffRTGS { get; set; } = 0.02;
-        public double DiffIMPS { get; set; } = 0.06;
-        public List<BankAccount> Accounts { get; set; } = new List<BankAccount>();
+        public double SameRTGS { get; set; }
+        public double SameIMPS { get; set; }
+        public double DiffRTGS { get; set; }
+        public double DiffIMPS { get; set; }
+        public List<BankAccount> Accounts { get; set; }
 
-        public List<Currency> Currencies { get; set; } = new List<Currency>();
+        public List<Currency> Currencies { get; set; }
 
         public string StaffUsername { get; set; }
         public string StaffPassword { get; set; }

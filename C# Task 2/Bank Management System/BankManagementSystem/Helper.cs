@@ -5,7 +5,7 @@ namespace BankManagement
     public static class Helper
     {
 
-        public static string TextInput()
+        public static string GetTextInput()
         {
             while (true)
             {
@@ -21,7 +21,7 @@ namespace BankManagement
             }
         }
 
-        public static int NumberInput()
+        public static int GetNumberInput()
         {
             while (true)
             {
@@ -37,7 +37,7 @@ namespace BankManagement
             }
         }
 
-        public static double DecimalInput()
+        public static double GetDecimalInput()
         {
             while (true)
             {
@@ -49,6 +49,22 @@ namespace BankManagement
                 else
                 {
                     Console.WriteLine("Invalid Input. Please enter numerical / decimal input.");
+                }
+            }
+        }
+
+        public static string GetCurrencyCodeInput()
+        {
+            while (true)
+            {
+                string code = Helper.GetTextInput();
+                if (code.Length == 3)
+                {
+                    return code;
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect input. Code should be consist of three letters only. Please try again.");
                 }
             }
         }
