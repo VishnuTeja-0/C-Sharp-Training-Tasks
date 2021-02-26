@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using BankManagement.Models;
 using BankManagement.Services;
-using static BankManagement.EnumsClass;
+using static BankManagement.Enums;
 
 namespace BankManagement
 {
-    class BankManagementApp
+    public class BankManagementApp
     {
         private BankService _bankService;
 

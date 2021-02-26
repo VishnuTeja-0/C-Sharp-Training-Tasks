@@ -7,6 +7,7 @@ namespace BankManagement
 {
     public static class ExtensionMethods
     {
+
         public static bool IsAlphabetical(this string str)
         {
             return str.All(char.IsLetter);

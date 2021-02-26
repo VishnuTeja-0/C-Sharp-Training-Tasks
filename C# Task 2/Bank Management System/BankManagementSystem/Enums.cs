@@ -4,8 +4,7 @@ using System.Text;
 
 namespace BankManagement
 {
-
-    public class EnumsClass
+    public class Enums
     {
 
         public enum BankOperations
@@ -35,12 +34,6 @@ namespace BankManagement
             TransferFunds,
             ViewTransactionHistory,
             Logout
-        }
-
-        public enum TransactionTypes
-        {
-            Sent = 1,
-            Received
         }
     }
 }
