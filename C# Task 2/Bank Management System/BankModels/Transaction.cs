@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using static BankManagement.Enums;
-
+﻿
 namespace BankManagement.Models
 {
     public class Transaction
     {
-        public string Type { get; set; }
+        public TransactionTypes Type { get; set; }
         public string Id { get; set; }
         public string SenderBankId { get; set; }
         public string SenderId { get; set; }

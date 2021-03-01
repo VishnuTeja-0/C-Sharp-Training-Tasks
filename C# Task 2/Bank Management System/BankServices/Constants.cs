@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BankManagement
+﻿
+namespace BankManagement.Services
 {
-    public class DefaultValues
+    public class Constants
     {
         public const double sameRTGS = 0;
         public const double sameIMPS = 0.05;
