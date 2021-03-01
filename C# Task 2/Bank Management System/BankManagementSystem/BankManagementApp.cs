@@ -1,73 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using BankManagement.Models;
 using BankManagement.Services;
-using static BankManagement.EnumsClass;
 
 namespace BankManagement
 {
-    class BankManagementApp
+    public class BankManagementApp
     {
         private BankService _bankService;
 
         public void DepositRequest(string bankId, string accountId)
         {
-            Console.WriteLine("Enter 3-letter currency code : ");
+            ("Enter 3-letter currency code : ").Display();
             string code = Helper.GetCurrencyCodeInput();
             if (_bankService.IsCurrencyAvailable(bankId, accountId, code))
             {
-                Console.WriteLine("Enter deposit Amount : ");
+                ("Enter deposit Amount : ").Display();
                 double amount = Helper.GetDecimalInput();
                 _bankService.DepositAmount(bankId, accountId, amount, code);
-                Console.WriteLine($"Amount deposited successfully! Current Balance : {_bankService.GetAccountBalance(bankId, accountId)}");
+                ($"Amount deposited successfully! Current Balance : {_bankService.GetAccountBalance(bankId, accountId)}").Display();
             }
             else
             {
-                Console.WriteLine("Given currency code is incorrect or not supported by bank. Please try again.");
+                ("Given currency code is incorrect or not supported by bank. Please try again.").Display();
             }
             ReturnToAccountMenu(bankId, accountId);
         }
 
         public void WithdrawRequest(string bankId, string accountId)
         {
-            Console.WriteLine("Enter withdraw amount : ");
+            ("Enter withdraw amount : ").Display();
             double amount = Helper.GetDecimalInput();
             if (amount <= _bankService.GetAccountBalance(bankId, accountId))
             {
                 _bankService.WithdrawAmount(bankId, accountId, amount);
-                Console.WriteLine($"Amount deposited succesfully! Current balance : {_bankService.GetAccountBalance(bankId, accountId)}");
+                ($"Amount deposited succesfully! Current balance : {_bankService.GetAccountBalance(bankId, accountId)}").Display();
             }
             else
             {
-                Console.WriteLine("Insufficient balance for withdrawal. Please try again.");
+                ("Insufficient balance for withdrawal. Please try again.").Display();
             }
             ReturnToAccountMenu(bankId, accountId);
         }
 
         public void TransferRequest(string bankId, string accountId)
         {
-            Console.WriteLine("Enter bank name of recipient account");
+            ("Enter bank name of recipient account").Display();
             string recipientBankId = SelectBank();
-            Console.WriteLine("Enter recipient account ID : ");
+            ("Enter recipient account ID : ").Display();
             string recipientAccountId = Console.ReadLine();
             if (_bankService.IsAccountAvailable(recipientBankId, recipientAccountId))
             {
-                Console.WriteLine("Enter transfer amount : ");
+                ("Enter transfer amount : ").Display();
                 double amount = Helper.GetDecimalInput();
                 if (amount <= _bankService.GetAccountBalance(bankId, accountId))
                 {
                     _bankService.TransferFunds(bankId, accountId, recipientBankId, recipientAccountId, amount);
-                    Console.WriteLine($"Amount transferred succesfully! Current balance : {_bankService.GetAccountBalance(bankId, accountId)}");
+                    ($"Amount transferred succesfully! Current balance : {_bankService.GetAccountBalance(bankId, accountId)}").Display();
                 }
                 else
                 {
-                    Console.WriteLine("Insufficient balance for transfer. Please try again.");
+                    ("Insufficient balance for transfer. Please try again.").Display();
                 }
             }
             else
             {
-                Console.WriteLine("No account by given ID exists. Please try again");
+                ("No account by given ID exists. Please try again").Display();
             }
             ReturnToAccountMenu(bankId, accountId);
         }
@@ -75,7 +73,7 @@ namespace BankManagement
         public void ViewTransactionRequest(string bankId, string accountId)
         {
             List<Transaction> transactions = _bankService.GetTransactions(bankId, accountId);
-            Console.WriteLine($"{"Transaction ", 41}{"Sender_Id ", 14}{"Sender_Bank ", 10}{"Sender_Name ", 10}{"Recipient_ID ", 14}{"Recipient_Bank ", 10}{"Recipient_Name ",10}{"Amount ", 8}{"Date_and_Time", 21}");
+            ($"{"Transaction ",41}{"Sender_Id ",14}{"Sender_Bank ",10}{"Sender_Name ",10}{"Recipient_ID ",14}{"Recipient_Bank ",10}{"Recipient_Name ",10}{"Amount ",8}{"Date_and_Time",21}").Display();
             foreach (Transaction transaction in transactions)
             {
                 Console.Write($"{transaction.Id,40} ");
@@ -86,13 +84,13 @@ namespace BankManagement
                 Console.Write($"{_bankService.GetBankName(transaction.ReceiverBankId),11} ");
                 Console.Write($"{_bankService.GetAccountName(transaction.ReceiverBankId, transaction.ReceiverId),11} ");
                 Console.Write($"{transaction.Amount,8} ");
-                Console.WriteLine($"{transaction.Time,21} \n");
+                ($"{transaction.Time,21} \n").Display();
             }
         }
 
         public void ReturnToAccountMenu(string bankId, string accountId)
         {
-            Console.WriteLine("\nPress any key to continue");
+            ("\nPress any key to continue").Display();
             Console.ReadKey(false);
             DisplayAccountMenu(bankId, accountId);
         }
@@ -102,10 +100,10 @@ namespace BankManagement
             Console.Clear();
             string bankName = _bankService.GetBankName(bankId);
             string accountName = _bankService.GetAccountName(bankId, accountId);
-            Console.WriteLine($"Welcome to {bankName} Bank! You are logged in as account holder, {accountName}.\n");
-            Console.WriteLine("1. Deposit amount\n2. Withdraw amount (INR only)\n3. Transfer Funds (INR only)");
-            Console.WriteLine("4. View Account Transaction History\n5. Logout");
-            Console.WriteLine("Please provide valid input from given options : ");
+            ($"Welcome to {bankName} Bank! You are logged in as account holder, {accountName}.\n").Display();
+            ("1. Deposit amount\n2. Withdraw amount (INR only)\n3. Transfer Funds (INR only)").Display();
+            ("4. View Account Transaction History\n5. Logout").Display();
+            ("Please provide valid input from given options : ").Display();
         }
 
         public void AccountLoginOptions(string bankId, string accountId)
@@ -134,32 +132,32 @@ namespace BankManagement
                         isLoggedIn = false;
                         break;
                     default:
-                        Console.WriteLine("Out of bounds. Please enter valid option from menu.");
+                        ("Out of bounds. Please enter valid option from menu.").Display();
                         break;
                 }
             }
-            Console.WriteLine("Successfully logged out");
+            ("Successfully logged out").Display();
         }
 
         public void CreateAccountRequest(string bankId)
         {
             Console.Clear();
-            Console.WriteLine("Enter name of account holder : ");
+            ("Enter name of account holder : ").Display();
             string newName = Helper.GetTextInput();
-            Console.WriteLine("Enter new username : ");
+            ("Enter new username : ").Display();
             string newUsername = Console.ReadLine();
             if (! _bankService.IsAccountHolder(bankId, newUsername))
             {
-                Console.WriteLine("Enter new password : ");
+                ("Enter new password : ").Display();
                 string newPassword = Console.ReadLine();
-                Console.WriteLine("Enter initial deposit : ");
+                ("Enter initial deposit : ").Display();
                 double initialDeposit = Helper.GetDecimalInput();
                 _bankService.CreateAccount(bankId, newName, newUsername, newPassword, initialDeposit);
-                Console.WriteLine("Account successfuly created!");
+                ("Account successfuly created!").Display();
             }
             else
             {
-                Console.WriteLine("Username already exists. Please try again.");
+                ("Username already exists. Please try again.").Display();
             }
             ReturnToStaffMenu(bankId);
         }
@@ -167,30 +165,30 @@ namespace BankManagement
         public void UpdateAccountRequest(string bankId)
         {
             Console.Clear();
-            Console.WriteLine("Enter account ID to update : ");
+            ("Enter account ID to update : ").Display();
             string accountId = Console.ReadLine();
             if (_bankService.IsAccountAvailable(bankId, accountId))
             {
-                Console.WriteLine("Enter name update : ");
+                ("Enter name update : ").Display();
                 string updatedName = Helper.GetTextInput();
-                Console.WriteLine("Enter username update : ");
+                ("Enter username update : ").Display();
                 string updatedUsername = Console.ReadLine();
                 if (!_bankService.IsAccountHolder(bankId, updatedUsername))
                 {
-                    Console.WriteLine("Enter password update : ");
+                    ("Enter password update : ").Display();
                     string updatedPassword = Console.ReadLine();
                     _bankService.UpdateAccount(bankId, accountId, updatedName, updatedUsername, updatedPassword);
-                    Console.WriteLine("Account details successfully updated!");
+                    ("Account details successfully updated!").Display();
                 }
                 else
                 {
-                    Console.WriteLine("Username already exists. Please try again.");
+                    ("Username already exists. Please try again.").Display();
                 }
 
             }
             else
             {
-                Console.WriteLine("Account with given ID does not exist. Please try again.");
+                ("Account with given ID does not exist. Please try again.").Display();
             }
             ReturnToStaffMenu(bankId);
         }
@@ -198,7 +196,7 @@ namespace BankManagement
         public void DeleteAccountRequest(string bankId)
         {
             Console.Clear();
-            Console.WriteLine("Enter account ID to delete : ");
+            ("Enter account ID to delete : ").Display();
             string accountId = Console.ReadLine();
             if(_bankService.IsAccountAvailable(bankId, accountId))
             {
@@ -206,7 +204,7 @@ namespace BankManagement
             }
             else
             {
-                Console.WriteLine("Account with given ID does not exist. Please try again.");
+                ("Account with given ID does not exist. Please try again.").Display();
             }
             ReturnToStaffMenu(bankId);
         }
@@ -214,11 +212,11 @@ namespace BankManagement
         public void AddCurrencyRequest(string bankId)
         {
             Console.Clear();
-            Console.WriteLine("Enter Name of Currency : ");
+            ("Enter Name of Currency : ").Display();
             string name = Helper.GetTextInput();
-            Console.WriteLine("Enter 3-Letter Currency Code : ");
+            ("Enter 3-Letter Currency Code : ").Display();
             string code = Helper.GetCurrencyCodeInput();
-            Console.WriteLine("Enter exchange rate with respect to Indian Rupee (INR)");
+            ("Enter exchange rate with respect to Indian Rupee (INR)").Display();
             double exchangeRate = Helper.GetDecimalInput();
             _bankService.AddCurrency(bankId, name, code, exchangeRate);
             Console.Write("Currency successfully added!");
@@ -228,47 +226,47 @@ namespace BankManagement
         public void UpdateChargesRequest(string bankId)
         {
             Console.Clear();
-            Console.WriteLine("Enter new RTGS percentage for transaction to same bank : ");
+            ("Enter new RTGS percentage for transaction to same bank : ").Display();
             double newSameRTGS = Helper.GetNumberInput() / 100;
-            Console.WriteLine("Enter new IMPS percentage for transaction to same bank : ");
+            ("Enter new IMPS percentage for transaction to same bank : ").Display();
             double newSameIMPS = Helper.GetNumberInput() / 100;
-            Console.WriteLine("Enter new RTGS percentage for transaction to different bank : ");
+            ("Enter new RTGS percentage for transaction to different bank : ").Display();
             double newDiffRTGS = Helper.GetNumberInput() / 100;
-            Console.WriteLine("Enter new IMPS percentage for transaction to different bank : ");
+            ("Enter new IMPS percentage for transaction to different bank : ").Display();
             double newDiffIMPS = Helper.GetNumberInput() / 100;
             _bankService.UpdateServiceCharges(bankId, newSameRTGS, newSameIMPS, newDiffRTGS, newDiffIMPS);
-            Console.WriteLine("Service charges successfully updated!");
+            ("Service charges successfully updated!").Display();
             ReturnToStaffMenu(bankId);
         }
 
         public void RevertTransactionRequest(string bankId)
         {
-            Console.WriteLine("Enter account ID : ");
+            ("Enter account ID : ").Display();
             string accountId = Console.ReadLine();
             if (_bankService.IsAccountAvailable(bankId, accountId))
             {
-                Console.WriteLine("Enter transacton ID to revert transaction : ");
+                ("Enter transacton ID to revert transaction : ").Display();
                 string transactionId = Console.ReadLine();
                 if (_bankService.IsTransactionAvailable(bankId, accountId, transactionId))
                 {
                     _bankService.RevertTransaction(bankId, accountId, transactionId);
-                    Console.WriteLine("Transaction succesfully reverted");
+                    ("Transaction succesfully reverted").Display();
                 }
                 else
                 {
-                    Console.WriteLine("Transaction with given ID does not exist. Please try again.");
+                    ("Transaction with given ID does not exist. Please try again.").Display();
                 }
             }
             else
             {
-                Console.WriteLine("Account with given ID does not exist. Please try again.");
+                ("Account with given ID does not exist. Please try again.").Display();
             }
             ReturnToStaffMenu(bankId);
         }
 
         public void ReturnToStaffMenu(string bankId)
         {
-            Console.WriteLine("\nPress any key to continue");
+            ("\nPress any key to continue").Display();
             Console.ReadKey(false);
             DisplayStaffMenu(bankId);
         }
@@ -277,10 +275,10 @@ namespace BankManagement
         {
             Console.Clear();
             string bankName = _bankService.GetBankName(bankId);
-            Console.WriteLine($"Welcome to {bankName} Bank! You are logged in as Bank Staff.\n");
-            Console.WriteLine("1. Create new account\n2. Update account\n3. Delete account\n4. Add new accepted currency\n5. Update service charges");
-            Console.WriteLine("6. View account transaction history\n7. Revert a transaction\n8. Logout");
-            Console.WriteLine("Please provide valid input from given options : ");
+            ($"Welcome to {bankName} Bank! You are logged in as Bank Staff.\n").Display();
+            ("1. Create new account\n2. Update account\n3. Delete account\n4. Add new accepted currency\n5. Update service charges").Display();
+            ("6. View account transaction history\n7. Revert a transaction\n8. Logout").Display();
+            ("Please provide valid input from given options : ").Display();
         }
 
         public void StaffLoginOptions(string bankId)
@@ -308,7 +306,7 @@ namespace BankManagement
                         UpdateChargesRequest(bankId);
                         break;
                     case StaffOperations.ViewTransactionHistory:
-                        Console.WriteLine("Enter account ID : ");
+                        ("Enter account ID : ").Display();
                         string accountId = Console.ReadLine();
                         ViewTransactionRequest(bankId, accountId);
                         ReturnToStaffMenu(bankId);
@@ -320,11 +318,11 @@ namespace BankManagement
                         isLoggedIn = false;
                         break;
                     default:
-                        Console.WriteLine("Out of bounds. Please enter valid option from menu.");
+                        ("Out of bounds. Please enter valid option from menu.").Display();
                         break;
                 }
             }
-            Console.WriteLine("Successfully logged out");
+            ("Successfully logged out").Display();
         }
 
         public string SelectBank()
@@ -338,20 +336,20 @@ namespace BankManagement
                 }
                 else
                 {
-                    Console.WriteLine("Given bank is not available in system. Please try again with a different bank");
+                    ("Given bank is not available in system. Please try again with a different bank").Display();
                 }
             }      
         }
 
         public void Login()
         {
-            Console.WriteLine("Enter bank name : ");
+            ("Enter bank name : ").Display();
             string bankId = SelectBank();
-            Console.WriteLine("Enter Staff / Account Username : ");
+            ("Enter Staff / Account Username : ").Display();
             string username = Console.ReadLine();
             if (_bankService.IsStaff(bankId, username))
             {
-                Console.WriteLine("Enter Password : ");
+                ("Enter Password : ").Display();
                 while (true)
                 {
                     string password = Console.ReadLine();
@@ -363,13 +361,13 @@ namespace BankManagement
                     }
                     else
                     {
-                        Console.WriteLine("Password does not match username credentials. Please try again.");
+                        ("Password does not match username credentials. Please try again.").Display();
                     }
                 }    
             }
             else if(_bankService.IsAccountHolder(bankId, username))
             {
-                Console.WriteLine("Enter Password : ");
+                ("Enter Password : ").Display();
                 while (true)
                 {
                     string password = Console.ReadLine();
@@ -381,40 +379,40 @@ namespace BankManagement
                     }
                     else
                     {
-                        Console.WriteLine("Password does not match username credentials. Please try again.");
+                        ("Password does not match username credentials. Please try again.").Display();
                     }
                 }
             }
             else
             {
-                Console.WriteLine("Invalid username credentials. Please try again.");
+                ("Invalid username credentials. Please try again.").Display();
             }
             ReturnToMainMenu();
         }
 
         public void SetupBank()
         {
-            Console.WriteLine("Enter Bank Name : ");
+            ("Enter Bank Name : ").Display();
             string bankName = Helper.GetTextInput();
             if (!_bankService.IsBankAvailable(bankName))
             {
-                Console.WriteLine("Enter Staff Username : ");
+                ("Enter Staff Username : ").Display();
                 string staffUsername = Console.ReadLine();
-                Console.WriteLine("Enter Staff Password : ");
+                ("Enter Staff Password : ").Display();
                 string staffPassword = Console.ReadLine();
                 _bankService.CreateBank(bankName, staffUsername, staffPassword);
-                Console.WriteLine("New bank successfully created!");
+                ("New bank successfully created!").Display();
             }
             else
             {
-                Console.WriteLine("Bank already available in system. Please try again.");
+                ("Bank already available in system. Please try again.").Display();
             }
             ReturnToMainMenu();
         }
 
         public void ReturnToMainMenu()
         {
-            Console.WriteLine("\nPress any key to continue");
+            ("\nPress any key to continue").Display();
             Console.ReadKey(false);
             DisplayMenu();
         }
@@ -422,9 +420,9 @@ namespace BankManagement
         public void DisplayMenu()
         {
             Console.Clear();
-            Console.WriteLine("Welcome to Bank Management System\n");
-            Console.WriteLine("1. Setup New Bank\n2. Login as account holder / bank staff\n3. Exit\n");
-            Console.WriteLine("Please select valid option : ");
+            ("Welcome to Bank Management System\n").Display();
+            ("1. Setup New Bank\n2. Login as account holder / bank staff\n3. Exit\n").Display();
+            ("Please select valid option : ").Display();
         }
 
         
@@ -447,7 +445,7 @@ namespace BankManagement
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Out of bounds. Please enter a number among the given options.");
+                        ("Out of bounds. Please enter a number among the given options.").Display();
                         break;
                 }
             }          
