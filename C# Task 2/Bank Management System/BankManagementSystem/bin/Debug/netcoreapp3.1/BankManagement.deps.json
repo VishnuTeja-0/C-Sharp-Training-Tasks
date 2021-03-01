@@ -7,14 +7,41 @@
   "targets": {
     ".NETCoreApp,Version=v3.1": {
       "BankManagement/1.0.0": {
+        "dependencies": {
+          "BankManagement.Models": "1.0.0",
+          "BankManagement.Services": "1.0.0"
+        },
         "runtime": {
           "BankManagement.dll": {}
+        }
+      },
+      "BankManagement.Models/1.0.0": {
+        "runtime": {
+          "BankManagement.Models.dll": {}
+        }
+      },
+      "BankManagement.Services/1.0.0": {
+        "dependencies": {
+          "BankManagement.Models": "1.0.0"
+        },
+        "runtime": {
+          "BankManagement.Services.dll": {}
         }
       }
     }
   },
   "libraries": {
     "BankManagement/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BankManagement.Models/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BankManagement.Services/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
