@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "BankManagement.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "BankManagement.Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BankManagement.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BankManagement.Contracts.dll": {}
+        }
+      },
       "BankManagement.Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -16,6 +29,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
+          "BankManagement.Contracts": "1.0.0",
           "BankManagement.Models": "1.0.0"
         },
         "compile": {
@@ -28,6 +42,11 @@
     }
   },
   "libraries": {
+    "BankManagement.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../BankManagement.Contracts/BankManagement.Contracts.csproj",
+      "msbuildProject": "../BankManagement.Contracts/BankManagement.Contracts.csproj"
+    },
     "BankManagement.Models/1.0.0": {
       "type": "project",
       "path": "../BankModels/BankManagement.Models.csproj",

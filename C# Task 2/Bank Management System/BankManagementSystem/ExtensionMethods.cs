@@ -6,9 +6,14 @@ namespace BankManagement
 {
     public static class ExtensionMethods
     {
-        public static void Display(this string str)
+        public static void DisplayLine(this string str)
         {
             Console.WriteLine(str);
+        }
+
+        public static void Display(this string str)
+        {
+            Console.Write(str);
         }
 
         public static bool IsAlphabetical(this string str)
