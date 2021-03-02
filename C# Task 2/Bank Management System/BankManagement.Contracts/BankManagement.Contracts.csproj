@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BankManagement.Contracts\BankManagement.Contracts.csproj" />
     <ProjectReference Include="..\BankModels\BankManagement.Models.csproj" />
   </ItemGroup>
 

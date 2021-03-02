@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace BankManagement
 {
@@ -65,6 +66,23 @@ namespace BankManagement
                 else
                 {
                     Console.WriteLine("Incorrect input. Code should be consist of three letters only. Please try again.");
+                }
+            }
+        }
+
+        public static string GetPasswordInput()
+        {
+            Regex re = new Regex("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]){8,}");
+            while (true)
+            {
+                string password = Console.ReadLine();
+                if (password.Length >= 8 && re.IsMatch(password))
+                {
+                    return password;
+                }
+                else
+                {
+                    ("Invalid password").DisplayLine();
                 }
             }
         }
