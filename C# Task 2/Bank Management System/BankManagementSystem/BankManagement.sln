@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankManagement", "BankManagement.csproj", "{28F98F02-47BA-4AB6-BCE6-934B8B28B6D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManagement.Models", "..\BankModels\BankManagement.Models.csproj", "{D9FA66D4-9A7F-4D5A-9B27-A794CC4D51D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankManagement.Models", "..\BankModels\BankManagement.Models.csproj", "{D9FA66D4-9A7F-4D5A-9B27-A794CC4D51D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManagement.Services", "..\BankServices\BankManagement.Services.csproj", "{DDEC0735-1AAF-442A-AA24-6CDE25CC3655}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankManagement.Services", "..\BankServices\BankManagement.Services.csproj", "{DDEC0735-1AAF-442A-AA24-6CDE25CC3655}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManagement.Contracts", "..\BankManagement.Contracts\BankManagement.Contracts.csproj", "{DAC22218-1B3A-41FA-A42E-51DE915D1281}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{DDEC0735-1AAF-442A-AA24-6CDE25CC3655}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDEC0735-1AAF-442A-AA24-6CDE25CC3655}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDEC0735-1AAF-442A-AA24-6CDE25CC3655}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAC22218-1B3A-41FA-A42E-51DE915D1281}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAC22218-1B3A-41FA-A42E-51DE915D1281}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAC22218-1B3A-41FA-A42E-51DE915D1281}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAC22218-1B3A-41FA-A42E-51DE915D1281}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

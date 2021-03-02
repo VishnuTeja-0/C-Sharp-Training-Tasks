@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BankManagement.Contracts;
 using BankManagement.Models;
 
 namespace BankManagement.Services
 {
-    public class BankService
+    public class BankService : IBankService
     {
-        List<Bank> _banks = new List<Bank>();
+        public List<Bank> _banks;
+        public BankService()
+        {
+            _banks = new List<Bank>();
+        }
 
         public void CreateBank(string bankName, string staffUsername, string staffPassword)
         {
@@ -20,16 +25,22 @@ namespace BankManagement.Services
                 DiffRTGS = Constants.diffRTGS,
                 DiffIMPS = Constants.diffIMPS,
                 Accounts = new List<BankAccount>(),
-                Currencies = new List<Currency>{new Currency { Code = Constants.currencyCode, 
-                                                               ExchangeRate = Constants.exchangeRate, 
-                                                               Name = Constants.currencyName }},
+                Currencies = new List<Currency>
+                {
+                    new Currency 
+                    { 
+                        Code = Constants.currencyCode, 
+                        ExchangeRate = Constants.exchangeRate, 
+                        Name = Constants.currencyName 
+                    }
+                },
                 StaffUsername = staffUsername,
                 StaffPassword = staffPassword
             };
             _banks.Add(bank);
         }
 
-        // Staff Functions
+        #region Staff Functions
 
         public void CreateAccount(string bankId, string newName, string newUsername, string newPassword, double initialDeposit)
         {
@@ -85,28 +96,32 @@ namespace BankManagement.Services
             BankAccount account = GetAccountById(bankId, accountId);
             Transaction transaction = GetTransactions(bankId, accountId).FirstOrDefault(i => i.Id == transactionId);
             double amount = transaction.Amount;
-            if (transaction.Type == TransactionTypes.Sent)
+            double serviceCharges;
+            switch (transaction.Type)
             {
-                Bank recipientBank = GetBankById(transaction.ReceiverBankId);
-                BankAccount recipientAccount = GetAccountById(recipientBank.Id, transaction.ReceiverId);
-                double serviceCharges = GetServiceCharges(bankId, recipientAccount.Id, amount, bank.SameRTGS, bank.SameIMPS, bank.DiffRTGS, bank.DiffIMPS);
-                account.Balance += amount + serviceCharges;
-                recipientAccount.Balance -= amount;
-                recipientAccount.Transactions.Remove(transaction);
-            }
-            else if (transaction.Type == TransactionTypes.Received)
-            {
-                Bank senderBank = GetBankById(transaction.SenderBankId);
-                BankAccount senderAccount = GetAccountById(senderBank.Id, transaction.SenderId);
-                double serviceCharges = GetServiceCharges(senderBank.Id, bankId, amount, senderBank.SameRTGS, senderBank.SameIMPS, senderBank.DiffRTGS, senderBank.DiffIMPS);
-                account.Balance -= amount;
-                senderAccount.Balance += amount + serviceCharges;
-                senderAccount.Transactions.Remove(transaction);
+                case TransactionTypes.Sent:
+                    Bank recipientBank = GetBankById(transaction.ReceiverBankId);
+                    BankAccount recipientAccount = GetAccountById(recipientBank.Id, transaction.ReceiverId);
+                    serviceCharges = GetServiceCharges(bankId, recipientAccount.Id, amount, bank.SameRTGS, bank.SameIMPS, bank.DiffRTGS, bank.DiffIMPS);
+                    account.Balance += amount + serviceCharges;
+                    recipientAccount.Balance -= amount;
+                    recipientAccount.Transactions.Remove(transaction);
+                    break;
+                case TransactionTypes.Received:
+                    Bank senderBank = GetBankById(transaction.SenderBankId);
+                    BankAccount senderAccount = GetAccountById(senderBank.Id, transaction.SenderId);
+                    serviceCharges = GetServiceCharges(senderBank.Id, bankId, amount, senderBank.SameRTGS, senderBank.SameIMPS, senderBank.DiffRTGS, senderBank.DiffIMPS);
+                    account.Balance -= amount;
+                    senderAccount.Balance += amount + serviceCharges;
+                    senderAccount.Transactions.Remove(transaction);
+                    break;
             }
             account.Transactions.Remove(transaction);
         }
 
-        // Account Functions
+        #endregion End of Staff Functions
+
+        #region Account Functions
 
         public void DepositAmount(string bankId, string accountId, double amount, string currencyCode)
         {
@@ -144,7 +159,9 @@ namespace BankManagement.Services
             return account.Transactions;
         }
 
-        // Service Functions
+        #endregion End of Account Functions
+
+        #region Service Functions
 
         public Bank GetBankById(string bankId)
         {
@@ -158,7 +175,7 @@ namespace BankManagement.Services
 
         public bool IsBankAvailable(string bankName)
         {
-            return _banks.Exists(i => i.Name == bankName);
+            return _banks.Any(i => i.Name == bankName);
         }
 
         public string GetBankId(string bankName)
@@ -183,7 +200,7 @@ namespace BankManagement.Services
 
         public bool IsAccountHolder(string bankId, string usernameInput)
         {
-            return GetBankById(bankId).Accounts.Exists(i => i.Username == usernameInput);
+            return GetBankById(bankId).Accounts.Any(i => i.Username == usernameInput);
         }
 
         public bool IsValidAccountPassword(string bankId, string usernameInput, string passwordInput)
@@ -194,7 +211,7 @@ namespace BankManagement.Services
 
         public bool IsAccountAvailable(string bankId, string accountId)
         {
-            return GetBankById(bankId).Accounts.Exists(i => i.Id == accountId);
+            return GetBankById(bankId).Accounts.Any(i => i.Id == accountId);
         }
 
         public string GetAccountId(string bankId, string username)
@@ -209,7 +226,7 @@ namespace BankManagement.Services
 
         public bool IsCurrencyAvailable(string bankId, string accountId, string currencyCode)
         {
-            return GetBankById(bankId).Currencies.Exists(i => i.Code == currencyCode);
+            return GetBankById(bankId).Currencies.Any(i => i.Code == currencyCode);
         }
 
         public double GetAccountBalance(string bankId, string accountId)
@@ -219,7 +236,7 @@ namespace BankManagement.Services
 
         public bool IsTransactionAvailable(string bankId, string accountId, string transactionId)
         {
-            return GetAccountById(bankId, accountId).Transactions.Exists(i => i.Id == transactionId);
+            return GetAccountById(bankId, accountId).Transactions.Any(i => i.Id == transactionId);
         }
 
         public string CreateId(string name)
@@ -252,6 +269,8 @@ namespace BankManagement.Services
         {
             return (senderBankId == receiverBankId) ? amount * (sameRTGS + sameIMPS) : amount * (diffRTGS + diffIMPS);
         }
+
+        #endregion End of Service Functions
 
     }
 }

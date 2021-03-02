@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "BankManagement.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "BankManagement.Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BankManagement.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BankManagement.Contracts.dll": {}
+        }
+      },
       "BankManagement.Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -15,6 +28,11 @@
     }
   },
   "libraries": {
+    "BankManagement.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../BankManagement.Contracts/BankManagement.Contracts.csproj",
+      "msbuildProject": "../BankManagement.Contracts/BankManagement.Contracts.csproj"
+    },
     "BankManagement.Models/1.0.0": {
       "type": "project",
       "path": "../BankModels/BankManagement.Models.csproj",
@@ -23,6 +41,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "BankManagement.Contracts >= 1.0.0",
       "BankManagement.Models >= 1.0.0"
     ]
   },
@@ -57,6 +76,9 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
+            "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 2\\Bank Management System\\BankManagement.Contracts\\BankManagement.Contracts.csproj": {
+              "projectPath": "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 2\\Bank Management System\\BankManagement.Contracts\\BankManagement.Contracts.csproj"
+            },
             "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 2\\Bank Management System\\BankModels\\BankManagement.Models.csproj": {
               "projectPath": "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 2\\Bank Management System\\BankModels\\BankManagement.Models.csproj"
             }
