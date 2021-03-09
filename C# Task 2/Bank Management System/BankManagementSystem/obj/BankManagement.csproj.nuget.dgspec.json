@@ -92,6 +92,9 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
+              "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 2\\Bank Management System\\BankManagement.Contracts\\BankManagement.Contracts.csproj": {
+                "projectPath": "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 2\\Bank Management System\\BankManagement.Contracts\\BankManagement.Contracts.csproj"
+              },
               "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 2\\Bank Management System\\BankModels\\BankManagement.Models.csproj": {
                 "projectPath": "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 2\\Bank Management System\\BankModels\\BankManagement.Models.csproj"
               },
