@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BankManagement.Services;
 
 namespace BankManagement
 {
@@ -8,7 +6,7 @@ namespace BankManagement
     {
         public static void Main(string[] args)
         {
-            BankManagementApp app = new BankManagementApp();
+            BankManagementApp app = new BankManagementApp(new BankService());
             app.Startup();
         }
     }
