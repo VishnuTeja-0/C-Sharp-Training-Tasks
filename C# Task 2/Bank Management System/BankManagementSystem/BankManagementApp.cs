@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using BankManagement.Models;
-using BankManagement.Services;
+using BankManagement.Contracts;
 
 namespace BankManagement
 {
     public class BankManagementApp
     {
-        private BankService _bankService;
+        private IBankService _bankService;
 
         public void DepositAmount(string bankId, string accountId)
         {
@@ -452,8 +452,12 @@ namespace BankManagement
 
         public void Startup()
         {
-            _bankService = new BankService();
             MainMenu();
+        }
+
+        public BankManagementApp(IBankService bankService)
+        {
+            _bankService = bankService;
         }
     }
 }
