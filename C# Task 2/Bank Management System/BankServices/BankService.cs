@@ -3,41 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using BankManagement.Contracts;
 using BankManagement.Models;
+using BankManagement.Services.EntityModels;
 
 namespace BankManagement.Services
 {
     public class BankService : IBankService
     {
-        public List<Bank> _banks;
-        public BankService()
-        {
-            _banks = new List<Bank>();
-        }
 
         public void CreateBank(string bankName, string staffUsername, string staffPassword)
         {
-            Bank bank = new Bank
+            EntityModels.Bank bank = new EntityModels.Bank
             {
-                Name = bankName,
-                Id = CreateId(bankName),
-                SameRTGS = Constants.sameRTGS,
-                SameIMPS = Constants.sameIMPS,
-                DiffRTGS = Constants.diffRTGS,
-                DiffIMPS = Constants.diffIMPS,
-                Accounts = new List<BankAccount>(),
-                Currencies = new List<Currency>
-                {
-                    new Currency 
-                    { 
-                        Code = Constants.currencyCode, 
-                        ExchangeRate = Constants.exchangeRate, 
-                        Name = Constants.currencyName 
-                    }
-                },
+                BankName = bankName,
+                BankId = CreateId(bankName),
+                SameRtgs = (decimal)Constants.sameRTGS,
+                SameImps = (decimal)Constants.sameIMPS,
+                DiffRtgs = (decimal)Constants.diffRTGS,
+                DiffImps = (decimal)Constants.diffIMPS,
+                SupportedCurrencies = $"{Constants.currencyCode}, ",
                 StaffUsername = staffUsername,
                 StaffPassword = staffPassword
             };
-            _banks.Add(bank);
+            
+            using (var context = new BankDBContext())
+            {
+                context.Banks.Add(bank);             
+                context.SaveChanges();
+            }
         }
 
         #region Staff Functions
@@ -50,10 +42,14 @@ namespace BankManagement.Services
                 Name = newName,
                 Username = newUsername,
                 Password = newPassword,
-                Balance = initialDeposit,
-                Transactions = new List<Transaction>()
+                Balance = initialDeposit
             };
-            GetBankById(bankId).Accounts.Add(bankAccount);
+            
+            using (var context = new BankDBContext())
+            {
+                context.Accounts.Add(bankAccount);
+                context.SaveChanges();
+            }
         }
 
         public void UpdateAccount(string bankId, string accountId, string newName, string newUsername, string newPassword)

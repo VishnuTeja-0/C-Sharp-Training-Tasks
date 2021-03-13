@@ -10,9 +10,8 @@ namespace BankManagement.Models
         public double SameIMPS { get; set; }
         public double DiffRTGS { get; set; }
         public double DiffIMPS { get; set; }
-        public List<BankAccount> Accounts { get; set; }
 
-        public List<Currency> Currencies { get; set; }
+        public string Currencies { get; set; }
 
         public string StaffUsername { get; set; }
         public string StaffPassword { get; set; }

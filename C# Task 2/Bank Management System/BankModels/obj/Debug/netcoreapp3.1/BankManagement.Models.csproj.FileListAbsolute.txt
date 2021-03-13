@@ -7,3 +7,6 @@ C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\
 C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankModels\bin\Debug\netcoreapp3.1\BankManagement.Models.pdb
 C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankModels\obj\Debug\netcoreapp3.1\BankManagement.Models.dll
 C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankModels\obj\Debug\netcoreapp3.1\BankManagement.Models.pdb
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankModels\bin\Debug\netcoreapp3.1\BankManagement.Models.runtimeconfig.json
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankModels\bin\Debug\netcoreapp3.1\BankManagement.Models.runtimeconfig.dev.json
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankModels\obj\Debug\netcoreapp3.1\BankManagement.Models.genruntimeconfig.cache

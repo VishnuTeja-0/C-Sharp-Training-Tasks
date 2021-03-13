@@ -1,0 +1,4 @@
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\obj\Debug\net472\BankManagement.csprojAssemblyReference.cache
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\obj\Debug\net472\BankManagement.AssemblyInfoInputs.cache
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\obj\Debug\net472\BankManagement.AssemblyInfo.cs
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankManagementSystem\obj\Debug\net472\BankManagement.csproj.CoreCompileInputs.cache

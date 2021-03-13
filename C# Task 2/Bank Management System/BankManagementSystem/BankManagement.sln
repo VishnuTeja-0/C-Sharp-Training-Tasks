@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankManagement.Models", "..
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankManagement.Services", "..\BankServices\BankManagement.Services.csproj", "{DDEC0735-1AAF-442A-AA24-6CDE25CC3655}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManagement.Contracts", "..\BankManagement.Contracts\BankManagement.Contracts.csproj", "{DAC22218-1B3A-41FA-A42E-51DE915D1281}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankManagement.Contracts", "..\BankManagement.Contracts\BankManagement.Contracts.csproj", "{DAC22218-1B3A-41FA-A42E-51DE915D1281}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
