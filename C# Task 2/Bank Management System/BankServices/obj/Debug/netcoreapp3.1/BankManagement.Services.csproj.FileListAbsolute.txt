@@ -15,3 +15,5 @@ C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\
 C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankServices\bin\Debug\netcoreapp3.1\BankManagement.Services.runtimeconfig.json
 C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankServices\bin\Debug\netcoreapp3.1\BankManagement.Services.runtimeconfig.dev.json
 C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankServices\obj\Debug\netcoreapp3.1\BankManagement.Services.genruntimeconfig.cache
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankServices\bin\Debug\netcoreapp3.1\BankManagement.EntityModels.dll
+C:\Users\C.V SARADA\Desktop\Study Resource\Keka-Technovert\Training\C# Training\C-Sharp-Training-Tasks\C# Task 2\Bank Management System\BankServices\bin\Debug\netcoreapp3.1\BankManagement.EntityModels.pdb

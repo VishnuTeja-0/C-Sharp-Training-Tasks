@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace BankManagement.Services.EntityModels
+namespace BankManagement.EntityModels
 {
     public partial class Bank
     {

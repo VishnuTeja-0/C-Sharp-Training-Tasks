@@ -3,14 +3,13 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace BankManagement.Services.EntityModels
+namespace BankManagement.EntityModels
 {
     public partial class Transaction
     {
         public string TransactionId { get; set; }
-        public string AccountId { get; set; }
-        public string TransactionType { get; set; }
-        public string AssociatedAccountId { get; set; }
+        public string SenderAccountId { get; set; }
+        public string RecipientAccountId { get; set; }
         public decimal? Amount { get; set; }
         public DateTime? TransactionDateTime { get; set; }
 

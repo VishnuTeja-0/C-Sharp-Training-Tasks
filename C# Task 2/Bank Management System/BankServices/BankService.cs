@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using BankManagement.Contracts;
 using BankManagement.Models;
-using BankManagement.Services.EntityModels;
+using BankManagement.EntityModels;
 
 namespace BankManagement.Services
 {
@@ -24,10 +25,18 @@ namespace BankManagement.Services
                 StaffUsername = staffUsername,
                 StaffPassword = staffPassword
             };
-            
+
+            EntityModels.Currency defaultCurrency = new EntityModels.Currency
+            {
+                CurrencyCode = Constants.currencyCode,
+                CurrencyName = Constants.currencyName,
+                ExchangeRate = (decimal)Constants.exchangeRate
+            };
+
             using (var context = new BankDBContext())
             {
-                context.Banks.Add(bank);             
+                context.Banks.Add(bank);
+                context.Currencies.Add(defaultCurrency);
                 context.SaveChanges();
             }
         }
@@ -36,13 +45,14 @@ namespace BankManagement.Services
 
         public void CreateAccount(string bankId, string newName, string newUsername, string newPassword, double initialDeposit)
         {
-            BankAccount bankAccount = new BankAccount
+            EntityModels.Account bankAccount = new EntityModels.Account
             {
-                Id = CreateId(newName),
-                Name = newName,
-                Username = newUsername,
-                Password = newPassword,
-                Balance = initialDeposit
+                AccountId = CreateId(newName),
+                BankId = bankId,
+                HolderName = newName,
+                AccountUsername = newUsername,
+                AccountPassword = newPassword,
+                Balance = (decimal)initialDeposit
             };
             
             using (var context = new BankDBContext())
@@ -52,67 +62,92 @@ namespace BankManagement.Services
             }
         }
 
-        public void UpdateAccount(string bankId, string accountId, string newName, string newUsername, string newPassword)
+        public void UpdateAccount(string accountId, string newName, string newUsername, string newPassword)
         {
-            BankAccount account = GetAccountById(bankId, accountId);
-            account.Name = newName;
-            account.Username = newUsername;
-            account.Password = newPassword;
+            EntityModels.Account account = GetAccountById(accountId);
+            account.HolderName = newName;
+            account.AccountUsername = newUsername;
+            account.AccountPassword = newPassword;
+            using (var context = new BankDBContext())
+            {
+                context.Accounts.Attach(account);
+                context.Entry(account).State = EntityState.Modified;
+                context.SaveChanges();
+            }      
         }
 
         public void DeleteAccount(string bankId, string accountId)
         {
-            BankAccount account = GetAccountById(bankId, accountId);
-            GetBankById(bankId).Accounts.Remove(account);
+            EntityModels.Account account = GetAccountById(accountId);
+            using (var context = new BankDBContext())
+            {
+                var entry = context.Entry(account);
+                context.Accounts.Attach(account);
+                context.Accounts.Remove(account);
+                context.SaveChanges();
+            }
         }
 
         public void AddCurrency(string bankId, string currencyName, string currencyCode, double exchangeRate)
         {
-            Currency curr = new Currency
+            EntityModels.Currency curr = new EntityModels.Currency
             {
-                Name = currencyName,
-                Code = currencyCode,
-                ExchangeRate = exchangeRate
+                CurrencyName = currencyName,
+                CurrencyCode = currencyCode,
+                ExchangeRate = (decimal)exchangeRate
             };
-            GetBankById(bankId).Currencies.Add(curr);
+
+            EntityModels.Bank bank = GetBankById(bankId);
+            bank.SupportedCurrencies += $"{currencyCode}, ";
+
+            using (var context = new BankDBContext())
+            {
+                context.Banks.Attach(bank);
+                context.Entry(bank).State = EntityState.Modified;
+                context.Currencies.Add(curr);
+                context.SaveChanges();
+            }          
         }
 
         public void UpdateServiceCharges(string bankId, double newSameRTGS, double newSameIMPS, double newDiffRTGS, double newDiffIMPS)
         {
-            Bank bank = GetBankById(bankId);
-            bank.SameRTGS = newSameRTGS;
-            bank.SameIMPS = newSameIMPS;
-            bank.DiffRTGS = newDiffRTGS;
-            bank.DiffIMPS = newDiffIMPS;
+            EntityModels.Bank bank = GetBankById(bankId);
+            bank.SameRtgs = (decimal)newSameRTGS;
+            bank.SameImps = (decimal)newSameIMPS;
+            bank.DiffRtgs = (decimal)newDiffRTGS;
+            bank.DiffImps = (decimal)newDiffIMPS;
+
+            using (var context = new BankDBContext())
+            {
+                context.Banks.Attach(bank);
+                context.Entry(bank).State = EntityState.Modified;
+                context.SaveChanges();
+            }
         }
 
-        public void RevertTransaction(string bankId, string accountId, string transactionId)
+        public void RevertTransaction(string transactionId)
         {
-            Bank bank = GetBankById(bankId);
-            BankAccount account = GetAccountById(bankId, accountId);
-            Transaction transaction = GetTransactions(bankId, accountId).FirstOrDefault(i => i.Id == transactionId);
-            double amount = transaction.Amount;
-            double serviceCharges;
-            switch (transaction.Type)
+            EntityModels.Transaction transaction = GetTransactionById(transactionId);
+            double amount = (double)transaction.Amount;
+
+            EntityModels.Account senderAccount = GetAccountById(transaction.SenderAccountId);
+            EntityModels.Account recipientAccount = GetAccountById(transaction.RecipientAccountId);
+            EntityModels.Bank senderBank = GetBankById(senderAccount.BankId);
+            EntityModels.Bank recipientBank = GetBankById(recipientAccount.BankId);
+            double serviceCharges = GetServiceCharges(senderBank.BankId, recipientBank.BankId, amount, (double)senderBank.SameRtgs, (double)senderBank.SameImps, (double)senderBank.DiffRtgs, (double)senderBank.DiffImps);
+            senderAccount.Balance += (decimal)(amount + serviceCharges);
+            recipientAccount.Balance -= (decimal)amount;
+
+            using (var context = new BankDBContext())
             {
-                case TransactionTypes.Sent:
-                    Bank recipientBank = GetBankById(transaction.ReceiverBankId);
-                    BankAccount recipientAccount = GetAccountById(recipientBank.Id, transaction.ReceiverId);
-                    serviceCharges = GetServiceCharges(bankId, recipientAccount.Id, amount, bank.SameRTGS, bank.SameIMPS, bank.DiffRTGS, bank.DiffIMPS);
-                    account.Balance += amount + serviceCharges;
-                    recipientAccount.Balance -= amount;
-                    recipientAccount.Transactions.Remove(transaction);
-                    break;
-                case TransactionTypes.Received:
-                    Bank senderBank = GetBankById(transaction.SenderBankId);
-                    BankAccount senderAccount = GetAccountById(senderBank.Id, transaction.SenderId);
-                    serviceCharges = GetServiceCharges(senderBank.Id, bankId, amount, senderBank.SameRTGS, senderBank.SameIMPS, senderBank.DiffRTGS, senderBank.DiffIMPS);
-                    account.Balance -= amount;
-                    senderAccount.Balance += amount + serviceCharges;
-                    senderAccount.Transactions.Remove(transaction);
-                    break;
+                context.Accounts.Attach(senderAccount);
+                context.Accounts.Attach(recipientAccount);
+                context.Transactions.Attach(transaction);
+                context.Entry(senderAccount).State = EntityState.Modified;
+                context.Entry(recipientAccount).State = EntityState.Modified;
+                context.Transactions.Remove(transaction);
+                context.SaveChanges();
             }
-            account.Transactions.Remove(transaction);
         }
 
         #endregion End of Staff Functions
@@ -121,67 +156,104 @@ namespace BankManagement.Services
 
         public void DepositAmount(string bankId, string accountId, double amount, string currencyCode)
         {
-            Bank bank = GetBankById(bankId);
-            if (currencyCode != "INR")
+            EntityModels.Bank bank = GetBankById(bankId);
+            using (var context = new BankDBContext())
             {
-                amount *= bank.Currencies.FirstOrDefault(i => i.Code == currencyCode).ExchangeRate;
+                if (currencyCode != "INR")
+                {
+                    amount *= (double)context.Currencies.Where(i => i.CurrencyCode == currencyCode).FirstOrDefault().ExchangeRate;
+                }
+                EntityModels.Account account = GetAccountById(accountId);
+                account.Balance += (decimal)amount;
+
+                context.Accounts.Attach(account);
+                context.Entry(account).State = EntityState.Modified;
+                context.SaveChanges();
             }
-            BankAccount account = GetAccountById(bankId, accountId);
-            account.Balance += amount;
+            
         }
 
-        public void WithdrawAmount(string bankId, string accountId, double amount)
+        public void WithdrawAmount(string accountId, double amount)
         {
-            BankAccount account = GetAccountById(bankId, accountId);
-            account.Balance -= amount;
+            EntityModels.Account account = GetAccountById(accountId);
+            account.Balance -= (decimal)amount;
+
+            using (var context = new BankDBContext())
+            {
+                context.Accounts.Attach(account);
+                context.Entry(account).State = EntityState.Modified;
+                context.SaveChanges();
+            }
         }
 
         public void TransferFunds(string senderBankId, string senderAccountId, string recipientBankId, string recipientAccountId, double amount)
         {
-            Bank senderBank = GetBankById(senderBankId);
-            Bank recipientBank = GetBankById(recipientBankId);
-            BankAccount senderAccount = GetAccountById(senderBankId, senderAccountId);
-            BankAccount recipientAccount = GetAccountById(recipientBankId, recipientAccountId);
-            double serviceCharges = GetServiceCharges(senderBank.Id, recipientBank.Id, amount, senderBank.SameRTGS, senderBank.SameIMPS, senderBank.DiffRTGS, senderBank.DiffIMPS); ;
-            senderAccount.Balance -= amount + serviceCharges;
-            recipientAccount.Balance += amount;
-            CreateTransaction(TransactionTypes.Sent, senderBankId, senderAccountId, senderBankId, senderAccountId, recipientBankId, recipientAccountId, amount + serviceCharges);
-            CreateTransaction(TransactionTypes.Received, recipientBankId, recipientAccountId, senderBankId, senderAccountId, recipientBankId, recipientAccountId, amount);
+            EntityModels.Bank senderBank = GetBankById(senderBankId);
+            EntityModels.Bank recipientBank = GetBankById(recipientBankId);
+            EntityModels.Account senderAccount = GetAccountById(senderAccountId);
+            EntityModels.Account recipientAccount = GetAccountById(recipientAccountId);
+            double serviceCharges = GetServiceCharges(senderBank.BankId, recipientBank.BankId, amount, (double)senderBank.SameRtgs, (double)senderBank.SameImps, (double)senderBank.DiffRtgs, (double)senderBank.DiffImps); ;
+            senderAccount.Balance -= (decimal)(amount + serviceCharges);
+            recipientAccount.Balance += (decimal)amount;
+            CreateTransaction(senderBankId, senderAccountId, recipientBankId, recipientAccountId, amount);
         }
 
-        public List<Transaction> GetTransactions(string bankId, string accountId)
+        public List<EntityModels.Transaction> GetTransactions(string accountId)
         {
-            BankAccount account = GetAccountById(bankId, accountId);
-            return account.Transactions;
+            EntityModels.Account account = GetAccountById(accountId);
+            using (var context = new BankDBContext())
+            {
+                return context.Transactions.Where(i => i.SenderAccountId == accountId || i.RecipientAccountId == accountId).ToList();
+            }
         }
 
         #endregion End of Account Functions
 
         #region Service Functions
 
-        public Bank GetBankById(string bankId)
+        public EntityModels.Bank GetBankById(string bankId)
         {
-            return _banks.FirstOrDefault(i => i.Id == bankId);
+            using (var context = new BankDBContext())
+            {
+                return context.Banks.Find(bankId);
+            }
         }
 
-        public BankAccount GetAccountById(string bankId, string accountId)
+        public EntityModels.Account GetAccountById(string accountId)
         {
-            return GetBankById(bankId).Accounts.FirstOrDefault(i => i.Id == accountId);
+            using (var context = new BankDBContext())
+            {
+                return context.Accounts.Find(accountId);
+            }
+        }
+
+        public EntityModels.Transaction GetTransactionById(string transactionId)
+        {
+            using (var context = new BankDBContext())
+            {
+                return context.Transactions.Find(transactionId);
+            }
         }
 
         public bool IsBankAvailable(string bankName)
         {
-            return _banks.Any(i => i.Name == bankName);
+            using (var context = new BankDBContext())
+            {
+                return context.Banks.Any(i => i.BankName == bankName);
+            }      
         }
 
         public string GetBankId(string bankName)
         {
-            return _banks.FirstOrDefault(i => i.Name == bankName).Id;
+            using (var context = new BankDBContext())
+            {
+                return context.Banks.Where(i => i.BankName == bankName).FirstOrDefault().BankId;
+            }
         }
 
         public string GetBankName(string bankId)
         {
-            return GetBankById(bankId).Name;
+            return GetBankById(bankId).BankName;
         }
 
         public bool IsStaff(string bankId, string usernameInput)
@@ -194,45 +266,61 @@ namespace BankManagement.Services
             return GetBankById(bankId).StaffPassword == passwordInput;
         }
 
-        public bool IsAccountHolder(string bankId, string usernameInput)
+        public bool IsAccountHolder(string usernameInput)
         {
-            return GetBankById(bankId).Accounts.Any(i => i.Username == usernameInput);
+            using (var context = new BankDBContext())
+            {
+                return context.Accounts.Any(i => i.AccountUsername == usernameInput);
+            }
         }
 
-        public bool IsValidAccountPassword(string bankId, string usernameInput, string passwordInput)
+        public bool IsValidAccountPassword(string usernameInput, string passwordInput)
         {
-            BankAccount bankAccount = GetBankById(bankId).Accounts.FirstOrDefault(i => i.Username == usernameInput);
-            return bankAccount.Password == passwordInput;
+            using (var context = new BankDBContext())
+            {
+                EntityModels.Account bankAccount = context.Accounts.Where(i => i.AccountUsername == usernameInput).FirstOrDefault();
+                return bankAccount.AccountPassword == passwordInput;
+            }
+            
         }
 
         public bool IsAccountAvailable(string bankId, string accountId)
         {
-            return GetBankById(bankId).Accounts.Any(i => i.Id == accountId);
+            using (var context = new BankDBContext())
+            {
+                return context.Accounts.Any(i => i.BankId == bankId && i.AccountId == accountId);
+            }
         }
 
         public string GetAccountId(string bankId, string username)
         {
-            return GetBankById(bankId).Accounts.FirstOrDefault(i => i.Username == username).Id;
+            using (var context = new BankDBContext())
+            {
+                return context.Accounts.Where(i => i.BankId == bankId && i.AccountUsername == username).FirstOrDefault().AccountId;
+            }
         }
 
-        public string GetAccountName(string bankId, string accountId)
+        public string GetAccountName(string accountId)
         {
-            return GetAccountById(bankId, accountId).Name;
+            return GetAccountById(accountId).HolderName;
         }
 
-        public bool IsCurrencyAvailable(string bankId, string accountId, string currencyCode)
+        public bool IsCurrencyAvailable(string bankId, string currencyCode)
         {
-            return GetBankById(bankId).Currencies.Any(i => i.Code == currencyCode);
+            return GetBankById(bankId).SupportedCurrencies.Contains($" {currencyCode},");
         }
 
-        public double GetAccountBalance(string bankId, string accountId)
+        public double GetAccountBalance(string accountId)
         {
-            return GetAccountById(bankId, accountId).Balance;
+            return (double)GetAccountById(accountId).Balance;
         }
 
-        public bool IsTransactionAvailable(string bankId, string accountId, string transactionId)
+        public bool IsTransactionAvailable(string transactionId)
         {
-            return GetAccountById(bankId, accountId).Transactions.Any(i => i.Id == transactionId);
+            using (var context = new BankDBContext())
+            {
+                return context.Transactions.Any(i => i.TransactionId == transactionId);
+            }
         }
 
         public string CreateId(string name)
@@ -240,20 +328,22 @@ namespace BankManagement.Services
             return $"{name.Substring(0, 3)}{DateTime.Now}";
         }
 
-        public void CreateTransaction(TransactionTypes type, string bankId, string accountId, string senderBankId, string senderAccountId, string recipientBankId, string recipientAccountId, double amount)
+        public void CreateTransaction(string senderBankId, string senderAccountId, string recipientBankId, string recipientAccountId, double amount)
         {
-            Transaction transaction = new Transaction
+            EntityModels.Transaction transaction = new EntityModels.Transaction
             {
-                Type = type,
-                Id = CreateTransactionId(bankId, accountId),
-                SenderBankId = senderBankId,
-                SenderId = senderAccountId,
-                ReceiverBankId = recipientBankId,
-                ReceiverId = recipientAccountId,
-                Amount = amount,
-                Time = DateTime.Now.ToString()
+                TransactionId = CreateTransactionId(senderBankId, senderAccountId),
+                SenderAccountId = senderAccountId,
+                RecipientAccountId = recipientAccountId,
+                Amount = (decimal)amount,
+                TransactionDateTime = DateTime.Now
             };
-            GetAccountById(bankId, accountId).Transactions.Add(transaction);
+            
+            using (var context = new BankDBContext())
+            {
+                context.Transactions.Add(transaction);
+                context.SaveChanges();
+            }
         }
 
         public string CreateTransactionId(string bankId, string accountId)
@@ -264,6 +354,11 @@ namespace BankManagement.Services
         public double GetServiceCharges(string senderBankId, string receiverBankId, double amount, double sameRTGS, double sameIMPS, double diffRTGS, double diffIMPS)
         {
             return (senderBankId == receiverBankId) ? amount * (sameRTGS + sameIMPS) : amount * (diffRTGS + diffIMPS);
+        }
+
+        public string GetAccountBank(string accountId)
+        {
+            return GetAccountById(accountId).BankId;
         }
 
         #endregion End of Service Functions

@@ -279,19 +279,6 @@
             "rid": "win"
           }
         }
-      },
-      "BankManagement.Models/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "dependencies": {
-          "EntityFramework": "6.4.4"
-        },
-        "compile": {
-          "bin/placeholder/BankManagement.Models.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/BankManagement.Models.dll": {}
-        }
       }
     }
   },
@@ -1027,16 +1014,10 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "BankManagement.Models/1.0.0": {
-      "type": "project",
-      "path": "../BankModels/BankManagement.Models.csproj",
-      "msbuildProject": "../BankModels/BankManagement.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "BankManagement.Models >= 1.0.0",
       "EntityFramework >= 6.4.4"
     ]
   },
@@ -1070,11 +1051,7 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {
-            "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 2\\Bank Management System\\BankModels\\BankManagement.Models.csproj": {
-              "projectPath": "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 2\\Bank Management System\\BankModels\\BankManagement.Models.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

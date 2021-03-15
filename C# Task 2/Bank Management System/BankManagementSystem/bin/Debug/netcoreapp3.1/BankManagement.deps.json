@@ -9,6 +9,7 @@
       "BankManagement/1.0.0": {
         "dependencies": {
           "BankManagement.Contracts": "1.0.0",
+          "BankManagement.EntityModels": "1.0.0",
           "BankManagement.Models": "1.0.0",
           "BankManagement.Services": "1.0.0",
           "EntityFramework": "6.4.4",
@@ -2108,11 +2109,20 @@
       },
       "BankManagement.Contracts/1.0.0": {
         "dependencies": {
+          "BankManagement.EntityModels": "1.0.0",
           "BankManagement.Models": "1.0.0",
           "EntityFramework": "6.4.4"
         },
         "runtime": {
           "BankManagement.Contracts.dll": {}
+        }
+      },
+      "BankManagement.EntityModels/1.0.0": {
+        "dependencies": {
+          "EntityFramework": "6.4.4"
+        },
+        "runtime": {
+          "BankManagement.EntityModels.dll": {}
         }
       },
       "BankManagement.Models/1.0.0": {
@@ -2126,6 +2136,7 @@
       "BankManagement.Services/1.0.0": {
         "dependencies": {
           "BankManagement.Contracts": "1.0.0",
+          "BankManagement.EntityModels": "1.0.0",
           "BankManagement.Models": "1.0.0",
           "EntityFramework": "6.4.4"
         },
@@ -3360,6 +3371,11 @@
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
     },
     "BankManagement.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BankManagement.EntityModels/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

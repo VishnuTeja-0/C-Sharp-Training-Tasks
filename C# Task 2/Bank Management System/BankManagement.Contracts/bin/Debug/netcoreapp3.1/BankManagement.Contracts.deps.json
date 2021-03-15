@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "BankManagement.Contracts/1.0.0": {
         "dependencies": {
+          "BankManagement.EntityModels": "1.0.0",
           "BankManagement.Models": "1.0.0",
           "EntityFramework": "6.4.4"
         },
@@ -223,6 +224,14 @@
           }
         }
       },
+      "BankManagement.EntityModels/1.0.0": {
+        "dependencies": {
+          "EntityFramework": "6.4.4"
+        },
+        "runtime": {
+          "BankManagement.EntityModels.dll": {}
+        }
+      },
       "BankManagement.Models/1.0.0": {
         "dependencies": {
           "EntityFramework": "6.4.4"
@@ -371,6 +380,11 @@
       "sha512": "sha512-CeWTdRNfRaSh0pm2gDTJFwVaXfTq6Xwv/sA887iwPTneW7oMtMlpvDIO+U60+3GWTB7Aom6oQwv5VZVUhQRdPQ==",
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
+    },
+    "BankManagement.EntityModels/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "BankManagement.Models/1.0.0": {
       "type": "project",

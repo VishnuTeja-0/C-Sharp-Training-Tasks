@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace BankManagement.Services.EntityModels
+namespace BankManagement.EntityModels
 {
     public partial class BankDBContext : DbContext
     {
@@ -10,17 +10,17 @@ namespace BankManagement.Services.EntityModels
         {
         }
 
-        public BankDBContext(DbContextOptions<BankDBContext> options)
+        /* public BankDBContext(DbContextOptions<BankDBContext> options)
             : base(options)
         {
-        }
+        } */
 
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Bank> Banks { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
@@ -165,6 +165,6 @@ namespace BankManagement.Services.EntityModels
             OnModelCreatingPartial(modelBuilder);
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder); */
     }
 }

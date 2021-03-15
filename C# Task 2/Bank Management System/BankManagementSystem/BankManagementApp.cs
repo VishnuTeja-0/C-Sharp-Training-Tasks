@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BankManagement.Models;
+using BankManagement.EntityModels;
 using BankManagement.Contracts;
 
 namespace BankManagement
@@ -13,12 +14,12 @@ namespace BankManagement
         {
             ("Enter 3-letter currency code : ").DisplayLine();
             string code = Helper.GetCurrencyCodeInput();
-            if (_bankService.IsCurrencyAvailable(bankId, accountId, code))
+            if (_bankService.IsCurrencyAvailable(bankId, code))
             {
                 ("Enter deposit Amount : ").DisplayLine();
                 double amount = Helper.GetDecimalInput();
                 _bankService.DepositAmount(bankId, accountId, amount, code);
-                ($"Amount deposited successfully! Current Balance : {_bankService.GetAccountBalance(bankId, accountId)}").DisplayLine();
+                ($"Amount deposited successfully! Current Balance : {_bankService.GetAccountBalance(accountId)}").DisplayLine();
             }
             else
             {
@@ -31,10 +32,10 @@ namespace BankManagement
         {
             ("Enter withdraw amount : ").DisplayLine();
             double amount = Helper.GetDecimalInput();
-            if (amount <= _bankService.GetAccountBalance(bankId, accountId))
+            if (amount <= _bankService.GetAccountBalance(accountId))
             {
-                _bankService.WithdrawAmount(bankId, accountId, amount);
-                ($"Amount withdrawn succesfully! Current balance : {_bankService.GetAccountBalance(bankId, accountId)}").DisplayLine();
+                _bankService.WithdrawAmount(accountId, amount);
+                ($"Amount withdrawn succesfully! Current balance : {_bankService.GetAccountBalance(accountId)}").DisplayLine();
             }
             else
             {
@@ -53,10 +54,10 @@ namespace BankManagement
             {
                 ("Enter transfer amount : ").DisplayLine();
                 double amount = Helper.GetDecimalInput();
-                if (amount <= _bankService.GetAccountBalance(bankId, accountId))
+                if (amount <= _bankService.GetAccountBalance(accountId))
                 {
                     _bankService.TransferFunds(bankId, accountId, recipientBankId, recipientAccountId, amount);
-                    ($"Amount transferred succesfully! Current balance : {_bankService.GetAccountBalance(bankId, accountId)}").DisplayLine();
+                    ($"Amount transferred succesfully! Current balance : {_bankService.GetAccountBalance(accountId)}").DisplayLine();
                 }
                 else
                 {
@@ -72,19 +73,19 @@ namespace BankManagement
 
         public void ViewTransaction(string bankId, string accountId)
         {
-            List<Transaction> transactions = _bankService.GetTransactions(bankId, accountId);
+            List<EntityModels.Transaction> transactions = _bankService.GetTransactions(accountId);
             ($"{"Transaction ",41}{"Sender_Id ",14}{"Sender_Bank ",10}{"Sender_Name ",10}{"Recipient_ID ",14}{"Recipient_Bank ",10}{"Recipient_Name ",10}{"Amount ",8}{"Date_and_Time",21}").DisplayLine();
-            foreach (Transaction transaction in transactions)
+            foreach (EntityModels.Transaction transaction in transactions)
             {
-                ($"{transaction.Id,40} ").Display();
-                ($"{transaction.SenderId,14} ").Display();
-                ($"{_bankService.GetBankName(transaction.SenderBankId),11} ").Display();
-                ($"{_bankService.GetAccountName(transaction.SenderBankId, transaction.SenderId),11} ").Display();
-                ($"{transaction.ReceiverId,14} ").Display();
-                ($"{_bankService.GetBankName(transaction.ReceiverBankId),11} ").Display();
-                ($"{_bankService.GetAccountName(transaction.ReceiverBankId, transaction.ReceiverId),11} ").Display();
+                ($"{transaction.TransactionId,40} ").Display();
+                ($"{transaction.SenderAccountId,14} ").Display();
+                ($"{_bankService.GetBankName(_bankService.GetAccountBank(transaction.SenderAccountId)),11} ").Display();
+                ($"{_bankService.GetAccountName(transaction.SenderAccountId)} ").Display();
+                ($"{transaction.RecipientAccountId,14} ").Display();
+                ($"{_bankService.GetBankName(_bankService.GetAccountBank(transaction.RecipientAccountId)),11} ").Display();
+                ($"{_bankService.GetAccountName(transaction.RecipientAccountId),11} ").Display();
                 ($"{transaction.Amount,8} ").Display();
-                ($"{transaction.Time,21} \n").DisplayLine();
+                ($"{transaction.TransactionDateTime,21} \n").DisplayLine();
             }
         }
 
@@ -99,7 +100,7 @@ namespace BankManagement
         {
             Console.Clear();
             string bankName = _bankService.GetBankName(bankId);
-            string accountName = _bankService.GetAccountName(bankId, accountId);
+            string accountName = _bankService.GetAccountName(accountId);
             ($"Welcome to {bankName} Bank! You are logged in as account holder, {accountName}.\n").DisplayLine();
             ("1. Deposit amount\n2. Withdraw amount (INR only)\n3. Transfer Funds (INR only)").DisplayLine();
             ("4. View Account Transaction History\n5. Logout").DisplayLine();
@@ -146,7 +147,7 @@ namespace BankManagement
             string newName = Helper.GetTextInput();
             ("Enter new username : ").DisplayLine();
             string newUsername = Console.ReadLine();
-            if (! _bankService.IsAccountHolder(bankId, newUsername))
+            if (! _bankService.IsAccountHolder(newUsername))
             {
                 ("Enter Staff Password (Password must have atleast 8 characters, and atleast 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character) : ").DisplayLine();
                 string newPassword = Helper.GetPasswordInput();
@@ -173,11 +174,11 @@ namespace BankManagement
                 string updatedName = Helper.GetTextInput();
                 ("Enter username update : ").DisplayLine();
                 string updatedUsername = Console.ReadLine();
-                if (!_bankService.IsAccountHolder(bankId, updatedUsername))
+                if (!_bankService.IsAccountHolder(updatedUsername))
                 {
                     ("Enter Staff Password (Password must have atleast 8 characters, and atleast 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character) : ").DisplayLine();
                     string updatedPassword = Helper.GetPasswordInput();
-                    _bankService.UpdateAccount(bankId, accountId, updatedName, updatedUsername, updatedPassword);
+                    _bankService.UpdateAccount(accountId, updatedName, updatedUsername, updatedPassword);
                     ("Account details successfully updated!").DisplayLine();
                 }
                 else
@@ -247,9 +248,9 @@ namespace BankManagement
             {
                 ("Enter transacton ID to revert transaction : ").DisplayLine();
                 string transactionId = Console.ReadLine();
-                if (_bankService.IsTransactionAvailable(bankId, accountId, transactionId))
+                if (_bankService.IsTransactionAvailable(transactionId))
                 {
-                    _bankService.RevertTransaction(bankId, accountId, transactionId);
+                    _bankService.RevertTransaction(transactionId);
                     ("Transaction succesfully reverted").DisplayLine();
                 }
                 else
@@ -365,13 +366,13 @@ namespace BankManagement
                     }
                 }    
             }
-            else if(_bankService.IsAccountHolder(bankId, username))
+            else if(_bankService.IsAccountHolder(username))
             {
                 ("Enter Password : ").DisplayLine();
                 while (true)
                 {
                     string password = Console.ReadLine();
-                    if (_bankService.IsValidAccountPassword(bankId, username, password))
+                    if (_bankService.IsValidAccountPassword(username, password))
                     {
                         string accountId = _bankService.GetAccountId(bankId, username);
                         AccountLoginOptions(bankId, accountId);
