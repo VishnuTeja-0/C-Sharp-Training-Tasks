@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace BankManagement.EntityModels
+namespace BankManagement.Models.EntityModels
 {
     public partial class Account
     {
@@ -16,7 +16,7 @@ namespace BankManagement.EntityModels
         public string AccountId { get; set; }
         public string BankId { get; set; }
         public string HolderName { get; set; }
-        public decimal? Balance { get; set; }
+        public decimal Balance { get; set; }
         public string AccountUsername { get; set; }
         public string AccountPassword { get; set; }
 

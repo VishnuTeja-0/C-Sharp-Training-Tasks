@@ -280,19 +280,6 @@
           }
         }
       },
-      "BankManagement.EntityModels/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v3.1",
-        "dependencies": {
-          "EntityFramework": "6.4.4"
-        },
-        "compile": {
-          "bin/placeholder/BankManagement.EntityModels.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/BankManagement.EntityModels.dll": {}
-        }
-      },
       "BankManagement.Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -1041,11 +1028,6 @@
         "version.txt"
       ]
     },
-    "BankManagement.EntityModels/1.0.0": {
-      "type": "project",
-      "path": "../BankManagement.EntityModels/BankManagement.EntityModels.csproj",
-      "msbuildProject": "../BankManagement.EntityModels/BankManagement.EntityModels.csproj"
-    },
     "BankManagement.Models/1.0.0": {
       "type": "project",
       "path": "../BankModels/BankManagement.Models.csproj",
@@ -1054,7 +1036,6 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "BankManagement.EntityModels >= 1.0.0",
       "BankManagement.Models >= 1.0.0",
       "EntityFramework >= 6.4.4"
     ]
@@ -1090,9 +1071,6 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 2\\Bank Management System\\BankManagement.EntityModels\\BankManagement.EntityModels.csproj": {
-              "projectPath": "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 2\\Bank Management System\\BankManagement.EntityModels\\BankManagement.EntityModels.csproj"
-            },
             "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 2\\Bank Management System\\BankModels\\BankManagement.Models.csproj": {
               "projectPath": "C:\\Users\\C.V SARADA\\Desktop\\Study Resource\\Keka-Technovert\\Training\\C# Training\\C-Sharp-Training-Tasks\\C# Task 2\\Bank Management System\\BankModels\\BankManagement.Models.csproj"
             }

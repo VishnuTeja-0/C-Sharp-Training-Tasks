@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BankManagement.Contracts\BankManagement.Contracts.csproj" />
-    <ProjectReference Include="..\BankManagement.EntityModels\BankManagement.EntityModels.csproj" />
     <ProjectReference Include="..\BankModels\BankManagement.Models.csproj" />
     <ProjectReference Include="..\BankServices\BankManagement.Services.csproj" />
   </ItemGroup>

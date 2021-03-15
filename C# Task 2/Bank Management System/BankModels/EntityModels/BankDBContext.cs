@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace BankManagement.EntityModels
+namespace BankManagement.Models.EntityModels
 {
     public partial class BankDBContext : DbContext
     {

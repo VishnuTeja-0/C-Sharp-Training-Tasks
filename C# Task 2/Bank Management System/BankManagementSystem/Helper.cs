@@ -38,12 +38,12 @@ namespace BankManagement
             }
         }
 
-        public static double GetDecimalInput()
+        public static decimal GetDecimalInput()
         {
             while (true)
             {
                 string userInput = Console.ReadLine();
-                if (!string.IsNullOrEmpty(userInput) && Double.TryParse(userInput, out double num))
+                if (!string.IsNullOrEmpty(userInput) && Decimal.TryParse(userInput, out decimal num))
                 {
                     return num;
                 }

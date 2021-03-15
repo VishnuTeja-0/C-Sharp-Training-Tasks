@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using BankManagement.Models;
-using BankManagement.EntityModels;
 using BankManagement.Contracts;
 
 namespace BankManagement
@@ -17,7 +16,7 @@ namespace BankManagement
             if (_bankService.IsCurrencyAvailable(bankId, code))
             {
                 ("Enter deposit Amount : ").DisplayLine();
-                double amount = Helper.GetDecimalInput();
+                decimal amount = Helper.GetDecimalInput();
                 _bankService.DepositAmount(bankId, accountId, amount, code);
                 ($"Amount deposited successfully! Current Balance : {_bankService.GetAccountBalance(accountId)}").DisplayLine();
             }
@@ -31,7 +30,7 @@ namespace BankManagement
         public void WithdrawAmount(string bankId, string accountId)
         {
             ("Enter withdraw amount : ").DisplayLine();
-            double amount = Helper.GetDecimalInput();
+            decimal amount = Helper.GetDecimalInput();
             if (amount <= _bankService.GetAccountBalance(accountId))
             {
                 _bankService.WithdrawAmount(accountId, amount);
@@ -53,7 +52,7 @@ namespace BankManagement
             if (_bankService.IsAccountAvailable(recipientBankId, recipientAccountId))
             {
                 ("Enter transfer amount : ").DisplayLine();
-                double amount = Helper.GetDecimalInput();
+                decimal amount = Helper.GetDecimalInput();
                 if (amount <= _bankService.GetAccountBalance(accountId))
                 {
                     _bankService.TransferFunds(bankId, accountId, recipientBankId, recipientAccountId, amount);
@@ -73,9 +72,9 @@ namespace BankManagement
 
         public void ViewTransaction(string bankId, string accountId)
         {
-            List<EntityModels.Transaction> transactions = _bankService.GetTransactions(accountId);
+            List<Models.EntityModels.Transaction> transactions = _bankService.GetTransactions(accountId);
             ($"{"Transaction ",41}{"Sender_Id ",14}{"Sender_Bank ",10}{"Sender_Name ",10}{"Recipient_ID ",14}{"Recipient_Bank ",10}{"Recipient_Name ",10}{"Amount ",8}{"Date_and_Time",21}").DisplayLine();
-            foreach (EntityModels.Transaction transaction in transactions)
+            foreach (Models.EntityModels.Transaction transaction in transactions)
             {
                 ($"{transaction.TransactionId,40} ").Display();
                 ($"{transaction.SenderAccountId,14} ").Display();
@@ -152,7 +151,7 @@ namespace BankManagement
                 ("Enter Staff Password (Password must have atleast 8 characters, and atleast 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character) : ").DisplayLine();
                 string newPassword = Helper.GetPasswordInput();
                 ("Enter initial deposit : ").DisplayLine();
-                double initialDeposit = Helper.GetDecimalInput();
+                decimal initialDeposit = Helper.GetDecimalInput();
                 _bankService.CreateAccount(bankId, newName, newUsername, newPassword, initialDeposit);
                 ("Account successfuly created!").DisplayLine();
             }
@@ -218,7 +217,7 @@ namespace BankManagement
             ("Enter 3-Letter Currency Code : ").DisplayLine();
             string code = Helper.GetCurrencyCodeInput();
             ("Enter exchange rate with respect to Indian Rupee (INR)").DisplayLine();
-            double exchangeRate = Helper.GetDecimalInput();
+            decimal exchangeRate = Helper.GetDecimalInput();
             _bankService.AddCurrency(bankId, name, code, exchangeRate);
             ("Currency successfully added!").Display();
             ReturnToStaffMenu(bankId);
@@ -228,13 +227,13 @@ namespace BankManagement
         {
             Console.Clear();
             ("Enter new RTGS percentage for transaction to same bank : ").DisplayLine();
-            double newSameRTGS = Helper.GetNumberInput() / 100;
+            decimal newSameRTGS = Helper.GetNumberInput() / 100;
             ("Enter new IMPS percentage for transaction to same bank : ").DisplayLine();
-            double newSameIMPS = Helper.GetNumberInput() / 100;
+            decimal newSameIMPS = Helper.GetNumberInput() / 100;
             ("Enter new RTGS percentage for transaction to different bank : ").DisplayLine();
-            double newDiffRTGS = Helper.GetNumberInput() / 100;
+            decimal newDiffRTGS = Helper.GetNumberInput() / 100;
             ("Enter new IMPS percentage for transaction to different bank : ").DisplayLine();
-            double newDiffIMPS = Helper.GetNumberInput() / 100;
+            decimal newDiffIMPS = Helper.GetNumberInput() / 100;
             _bankService.UpdateServiceCharges(bankId, newSameRTGS, newSameIMPS, newDiffRTGS, newDiffIMPS);
             ("Service charges successfully updated!").DisplayLine();
             ReturnToStaffMenu(bankId);
