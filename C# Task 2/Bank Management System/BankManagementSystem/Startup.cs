@@ -7,7 +7,7 @@ namespace BankManagement
         public static void Main(string[] args)
         {
             BankManagementApp app = new BankManagementApp(new BankService());
-            app.Startup();
+            app.MainMenu();
         }
     }
 }

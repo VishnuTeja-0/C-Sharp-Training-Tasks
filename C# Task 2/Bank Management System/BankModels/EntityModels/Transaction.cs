@@ -13,7 +13,7 @@ namespace BankManagement.Models.EntityModels
         public decimal Amount { get; set; }
         public DateTime TransactionDateTime { get; set; }
 
-        public virtual Account Account { get; set; }
-        public virtual Account AssociatedAccount { get; set; }
+        public virtual Account SenderAccount { get; set; }
+        public virtual Account RecipientAccount { get; set; }
     }
 }

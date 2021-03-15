@@ -40,9 +40,9 @@ namespace BankManagement.Contracts
         public bool IsCurrencyAvailable(string bankId, string currencyCode);
         public decimal GetAccountBalance(string accountId);
         public bool IsTransactionAvailable(string transactionId);
-        public string CreateId(string name);
+        public string GenerateId(string name);
         public void CreateTransaction(string senderBankId, string senderAccountId, string recipientBankId, string recipientAccountId, decimal amount);
-        public string CreateTransactionId(string bankId, string accountId);
+        public string GenerateTransactionId(string bankId, string accountId);
         public decimal GetServiceCharges(string senderBankId, string receiverBankId, decimal amount, decimal sameRTGS, decimal sameIMPS, decimal diffRTGS, decimal diffIMPS);
         public string GetAccountBank(string accountId);
         #endregion End of Service Functions
