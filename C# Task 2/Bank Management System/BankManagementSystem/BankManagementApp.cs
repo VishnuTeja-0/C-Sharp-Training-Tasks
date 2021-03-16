@@ -141,14 +141,12 @@ namespace BankManagement
                 {
                     Constants.DBUpdateExceptionMessage.DisplayLine();
                     UpEx.ToString().DisplayLine();
+                    ReturnToAccountMenu(bankId, accountId);
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException EnEx)
                 {
                     Constants.DBUpdateExceptionMessage.DisplayLine();
                     EnEx.ToString().DisplayLine();
-                }
-                finally
-                {
                     ReturnToAccountMenu(bankId, accountId);
                 }
 
@@ -345,14 +343,12 @@ namespace BankManagement
                 {
                     Constants.DBUpdateExceptionMessage.DisplayLine();
                     UpEx.ToString().DisplayLine();
+                    ReturnToStaffMenu(bankId);
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException EnEx)
                 {
                     Constants.DBUpdateExceptionMessage.DisplayLine();
                     EnEx.ToString().DisplayLine();
-                }
-                finally
-                {
                     ReturnToStaffMenu(bankId);
                 }
             }
@@ -487,14 +483,12 @@ namespace BankManagement
                 {
                     Constants.DBUpdateExceptionMessage.DisplayLine();
                     UpEx.ToString().DisplayLine();
+                    ReturnToMainMenu();
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException EnEx)
                 {
                     Constants.DBUpdateExceptionMessage.DisplayLine();
                     EnEx.ToString().DisplayLine();
-                }
-                finally
-                {
                     ReturnToMainMenu();
                 }
             }          

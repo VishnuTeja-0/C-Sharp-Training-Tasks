@@ -9,8 +9,8 @@ namespace BankManagement.Models.EntityModels
     {
         public Account()
         {
-            TransactionSenderAccounts = new HashSet<Transaction>();
             TransactionRecipientAccounts = new HashSet<Transaction>();
+            TransactionSenderAccounts = new HashSet<Transaction>();
         }
 
         public string AccountId { get; set; }
@@ -21,7 +21,7 @@ namespace BankManagement.Models.EntityModels
         public string AccountPassword { get; set; }
 
         public virtual Bank Bank { get; set; }
-        public virtual ICollection<Transaction> TransactionSenderAccounts { get; set; }
         public virtual ICollection<Transaction> TransactionRecipientAccounts { get; set; }
+        public virtual ICollection<Transaction> TransactionSenderAccounts { get; set; }
     }
 }
