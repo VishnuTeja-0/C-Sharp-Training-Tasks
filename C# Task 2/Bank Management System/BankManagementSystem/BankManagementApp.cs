@@ -112,28 +112,46 @@ namespace BankManagement
             while (isLoggedIn)
             {
                 AccountOperations option = (AccountOperations)Helper.GetNumberInput();
-                switch (option)
+                try
                 {
-                    case AccountOperations.DepositAmount:
-                        DepositAmount(bankId, accountId);
-                        break;
-                    case AccountOperations.WithdrawAmount:
-                        WithdrawAmount(bankId, accountId);
-                        break;
-                    case AccountOperations.TransferFunds:
-                        TransferFunds(bankId, accountId);
-                        break;
-                    case AccountOperations.ViewTransactionHistory:
-                        ViewTransaction(bankId, accountId);
-                        ReturnToAccountMenu(bankId, accountId);
-                        break;
-                    case AccountOperations.Logout:
-                        isLoggedIn = false;
-                        break;
-                    default:
-                        Constants.OutOfBoundsMessage.DisplayLine();
-                        break;
+                    switch (option)
+                    {
+                        case AccountOperations.DepositAmount:
+                            DepositAmount(bankId, accountId);
+                            break;
+                        case AccountOperations.WithdrawAmount:
+                            WithdrawAmount(bankId, accountId);
+                            break;
+                        case AccountOperations.TransferFunds:
+                            TransferFunds(bankId, accountId);
+                            break;
+                        case AccountOperations.ViewTransactionHistory:
+                            ViewTransaction(bankId, accountId);
+                            ReturnToAccountMenu(bankId, accountId);
+                            break;
+                        case AccountOperations.Logout:
+                            isLoggedIn = false;
+                            break;
+                        default:
+                            Constants.OutOfBoundsMessage.DisplayLine();
+                            break;
+                    }
                 }
+                catch(Microsoft.EntityFrameworkCore.DbUpdateException UpEx)
+                {
+                    Constants.DBUpdateExceptionMessage.DisplayLine();
+                    UpEx.ToString().DisplayLine();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException EnEx)
+                {
+                    Constants.DBUpdateExceptionMessage.DisplayLine();
+                    EnEx.ToString().DisplayLine();
+                }
+                finally
+                {
+                    ReturnToAccountMenu(bankId, accountId);
+                }
+
             }
             Constants.LogOutMessage.DisplayLine();
         }
@@ -287,38 +305,55 @@ namespace BankManagement
             while (isLoggedIn)
             {
                 StaffOperations option = (StaffOperations)Helper.GetNumberInput();
-                switch (option)
+                try
                 {
-                    case StaffOperations.CreateAccount:
-                        CreateAccount(bankId);
-                        break;
-                    case StaffOperations.UpdateAccount:
-                        UpdateAccount(bankId);
-                        break;
-                    case StaffOperations.DeleteAccount:
-                        DeleteAccount(bankId);
-                        break;
-                    case StaffOperations.AddCurrency:
-                        AddCurrency(bankId);
-                        break;
-                    case StaffOperations.UpdateServiceCharges:
-                        UpdateCharges(bankId);
-                        break;
-                    case StaffOperations.ViewTransactionHistory:
-                        Constants.Staff.AccountIdPrompt.DisplayLine();
-                        string accountId = Console.ReadLine();
-                        ViewTransaction(bankId, accountId);
-                        ReturnToStaffMenu(bankId);
-                        break;
-                    case StaffOperations.RevertTransaction:
-                        RevertTransaction(bankId);
-                        break;
-                    case StaffOperations.Logout:
-                        isLoggedIn = false;
-                        break;
-                    default:
-                        Constants.OutOfBoundsMessage.DisplayLine();
-                        break;
+                    switch (option)
+                    {
+                        case StaffOperations.CreateAccount:
+                            CreateAccount(bankId);
+                            break;
+                        case StaffOperations.UpdateAccount:
+                            UpdateAccount(bankId);
+                            break;
+                        case StaffOperations.DeleteAccount:
+                            DeleteAccount(bankId);
+                            break;
+                        case StaffOperations.AddCurrency:
+                            AddCurrency(bankId);
+                            break;
+                        case StaffOperations.UpdateServiceCharges:
+                            UpdateCharges(bankId);
+                            break;
+                        case StaffOperations.ViewTransactionHistory:
+                            Constants.Staff.AccountIdPrompt.DisplayLine();
+                            string accountId = Console.ReadLine();
+                            ViewTransaction(bankId, accountId);
+                            ReturnToStaffMenu(bankId);
+                            break;
+                        case StaffOperations.RevertTransaction:
+                            RevertTransaction(bankId);
+                            break;
+                        case StaffOperations.Logout:
+                            isLoggedIn = false;
+                            break;
+                        default:
+                            Constants.OutOfBoundsMessage.DisplayLine();
+                            break;
+                    }
+                }
+                catch (Microsoft.EntityFrameworkCore.DbUpdateException UpEx)
+                {
+                    Constants.DBUpdateExceptionMessage.DisplayLine();
+                    UpEx.ToString().DisplayLine();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException EnEx)
+                {
+                    Constants.DBUpdateExceptionMessage.DisplayLine();
+                    EnEx.ToString().DisplayLine();
+                }
+                finally
+                {
+                    ReturnToStaffMenu(bankId);
                 }
             }
             Constants.LogOutMessage.DisplayLine();
@@ -430,20 +465,37 @@ namespace BankManagement
             while (true)
             {
                 BankOperations option = (BankOperations)Helper.GetNumberInput();
-                switch (option)
+                try
                 {
-                    case BankOperations.SetupBank:
-                        CreateBank();
-                        break;
-                    case BankOperations.Login:
-                        Login();
-                        break;
-                    case BankOperations.Exit:
-                        Environment.Exit(0);
-                        break;
-                    default:
-                        Constants.OutOfBoundsMessage.DisplayLine();
-                        break;
+                    switch (option)
+                    {
+                        case BankOperations.SetupBank:
+                            CreateBank();
+                            break;
+                        case BankOperations.Login:
+                            Login();
+                            break;
+                        case BankOperations.Exit:
+                            Environment.Exit(0);
+                            break;
+                        default:
+                            Constants.OutOfBoundsMessage.DisplayLine();
+                            break;
+                    }
+                }
+                catch (Microsoft.EntityFrameworkCore.DbUpdateException UpEx)
+                {
+                    Constants.DBUpdateExceptionMessage.DisplayLine();
+                    UpEx.ToString().DisplayLine();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException EnEx)
+                {
+                    Constants.DBUpdateExceptionMessage.DisplayLine();
+                    EnEx.ToString().DisplayLine();
+                }
+                finally
+                {
+                    ReturnToMainMenu();
                 }
             }          
 

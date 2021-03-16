@@ -10,6 +10,8 @@ namespace BankManagement
         public static string OptionSelectionPrompt = "Please select valid option : ";
         public static string PressKeyPrompt = "\nPress any key to continue";
         public static string PasswordPrompt = "Enter Password (Password must have atleast 8 characters, and atleast 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character) : ";
+        public static string DBUpdateExceptionMessage = "There was an error while updating database. Exception Details : ";
+        public static string SQLExceptionMessage = "There was an issue with database connection. Exception Details : ";
 
         public static class MainMenu
         {

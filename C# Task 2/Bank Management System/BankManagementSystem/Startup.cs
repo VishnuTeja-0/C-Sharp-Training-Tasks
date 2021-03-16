@@ -6,8 +6,16 @@ namespace BankManagement
     {
         public static void Main(string[] args)
         {
-            BankManagementApp app = new BankManagementApp(new BankService());
-            app.MainMenu();
+            try
+            {
+                BankManagementApp app = new BankManagementApp(new BankService());
+                app.MainMenu();
+            }
+            catch(System.Data.SqlClient.SqlException SQLEx)
+            {
+                Constants.SQLExceptionMessage.DisplayLine();
+                SQLEx.ToString().DisplayLine();
+            }
         }
     }
 }
