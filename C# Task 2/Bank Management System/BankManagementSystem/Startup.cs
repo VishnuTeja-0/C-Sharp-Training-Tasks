@@ -1,4 +1,5 @@
 ﻿using BankManagement.Services;
+using System;
 
 namespace BankManagement
 {
@@ -11,10 +12,9 @@ namespace BankManagement
                 BankManagementApp app = new BankManagementApp(new BankService());
                 app.MainMenu();
             }
-            catch(System.Data.SqlClient.SqlException SQLEx)
+            catch(Exception ex)
             {
-                Constants.SQLExceptionMessage.DisplayLine();
-                SQLEx.ToString().DisplayLine();
+                ex.Message.DisplayLine();
             }
         }
     }

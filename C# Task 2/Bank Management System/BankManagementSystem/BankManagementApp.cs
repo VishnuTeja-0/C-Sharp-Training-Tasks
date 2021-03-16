@@ -17,8 +17,8 @@ namespace BankManagement
             {
                 Constants.Account.DepositAmountPrompt.DisplayLine();
                 decimal amount = Helper.GetDecimalInput();
-                _bankService.DepositAmount(bankId, accountId, amount, code);
-                ($"Amount deposited successfully! Current Balance : {_bankService.GetAccountBalance(accountId)}").DisplayLine();
+                _bankService.DepositAmount(accountId, amount, code);
+                String.Format(Constants.Account.DepositSuccessMessage, _bankService.GetAccountBalance(accountId).ToString()).DisplayLine();
             }
             else
             {
@@ -34,7 +34,7 @@ namespace BankManagement
             if (amount <= _bankService.GetAccountBalance(accountId))
             {
                 _bankService.WithdrawAmount(accountId, amount);
-                ($"Amount withdrawn succesfully! Current balance : {_bankService.GetAccountBalance(accountId)}").DisplayLine();
+                String.Format(Constants.Account.WithdrawSuccessMessage, _bankService.GetAccountBalance(accountId).ToString()).DisplayLine();
             }
             else
             {
@@ -56,7 +56,7 @@ namespace BankManagement
                 if (amount <= _bankService.GetAccountBalance(accountId))
                 {
                     _bankService.TransferFunds(bankId, accountId, recipientBankId, recipientAccountId, amount);
-                    ($"Amount transferred succesfully! Current balance : {_bankService.GetAccountBalance(accountId)}").DisplayLine();
+                    String.Format(Constants.Account.TransferSuccessMessage, _bankService.GetAccountBalance(accountId).ToString()).DisplayLine();
                 }
                 else
                 {
@@ -100,7 +100,7 @@ namespace BankManagement
             Console.Clear();
             string bankName = _bankService.GetBankName(bankId);
             string accountName = _bankService.GetAccountName(accountId);
-            ($"Welcome to {bankName} Bank! You are logged in as account holder, {accountName}.\n").DisplayLine();
+            String.Format(Constants.Account.WelcomeMessage, bankName, accountName).DisplayLine();
             Constants.Account.Menu.DisplayLine();
             Constants.OptionSelectionPrompt.DisplayLine();
         }
@@ -137,16 +137,9 @@ namespace BankManagement
                             break;
                     }
                 }
-                catch(Microsoft.EntityFrameworkCore.DbUpdateException UpEx)
+                catch (Exception ex)
                 {
-                    Constants.DBUpdateExceptionMessage.DisplayLine();
-                    UpEx.ToString().DisplayLine();
-                    ReturnToAccountMenu(bankId, accountId);
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException EnEx)
-                {
-                    Constants.DBUpdateExceptionMessage.DisplayLine();
-                    EnEx.ToString().DisplayLine();
+                    ex.Message.DisplayLine();
                     ReturnToAccountMenu(bankId, accountId);
                 }
 
@@ -161,9 +154,9 @@ namespace BankManagement
             string newName = Helper.GetTextInput();
             Constants.Staff.NewUsernamePrompt.DisplayLine();
             string newUsername = Console.ReadLine();
-            if (! _bankService.IsAccountHolder(newUsername))
+            if (!_bankService.IsAccountHolder(newUsername))
             {
-               Constants.PasswordPrompt.DisplayLine();
+                Constants.PasswordPrompt.DisplayLine();
                 string newPassword = Helper.GetPasswordInput();
                 Constants.Staff.InitialDepositPrompt.DisplayLine();
                 decimal initialDeposit = Helper.GetDecimalInput();
@@ -213,7 +206,7 @@ namespace BankManagement
             Console.Clear();
             Constants.Staff.DeleteAccountIdPrompt.DisplayLine();
             string accountId = Console.ReadLine();
-            if(_bankService.IsAccountAvailable(bankId, accountId))
+            if (_bankService.IsAccountAvailable(bankId, accountId))
             {
                 _bankService.DeleteAccount(bankId, accountId);
                 Constants.Staff.DeleteAccountSuccessMessage.Display();
@@ -291,7 +284,7 @@ namespace BankManagement
         {
             Console.Clear();
             string bankName = _bankService.GetBankName(bankId);
-            ($"Welcome to {bankName} Bank! You are logged in as Bank Staff.\n").DisplayLine();
+            String.Format(Constants.Staff.WelcomeMessage, bankName).DisplayLine();
             Constants.Staff.Menu.DisplayLine();
             Constants.OptionSelectionPrompt.DisplayLine();
         }
@@ -339,16 +332,9 @@ namespace BankManagement
                             break;
                     }
                 }
-                catch (Microsoft.EntityFrameworkCore.DbUpdateException UpEx)
+                catch (Exception ex)
                 {
-                    Constants.DBUpdateExceptionMessage.DisplayLine();
-                    UpEx.ToString().DisplayLine();
-                    ReturnToStaffMenu(bankId);
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException EnEx)
-                {
-                    Constants.DBUpdateExceptionMessage.DisplayLine();
-                    EnEx.ToString().DisplayLine();
+                    ex.Message.DisplayLine();
                     ReturnToStaffMenu(bankId);
                 }
             }
@@ -368,7 +354,7 @@ namespace BankManagement
                 {
                     Constants.MainMenu.BankNotAvailableMessage.DisplayLine();
                 }
-            }      
+            }
         }
 
         public void Login()
@@ -393,9 +379,9 @@ namespace BankManagement
                     {
                         Constants.MainMenu.InvalidPasswordMessage.DisplayLine();
                     }
-                }    
+                }
             }
-            else if(_bankService.IsAccountHolder(username))
+            else if (_bankService.IsAccountHolder(username))
             {
                 Constants.PasswordPrompt.DisplayLine();
                 while (true)
@@ -479,19 +465,12 @@ namespace BankManagement
                             break;
                     }
                 }
-                catch (Microsoft.EntityFrameworkCore.DbUpdateException UpEx)
+                catch(Exception ex)
                 {
-                    Constants.DBUpdateExceptionMessage.DisplayLine();
-                    UpEx.ToString().DisplayLine();
+                    ex.Message.DisplayLine();
                     ReturnToMainMenu();
                 }
-                catch (System.Data.Entity.Validation.DbEntityValidationException EnEx)
-                {
-                    Constants.DBUpdateExceptionMessage.DisplayLine();
-                    EnEx.ToString().DisplayLine();
-                    ReturnToMainMenu();
-                }
-            }          
+            }
 
         }
 

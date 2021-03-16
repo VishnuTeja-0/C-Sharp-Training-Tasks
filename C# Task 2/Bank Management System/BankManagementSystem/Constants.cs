@@ -10,8 +10,6 @@ namespace BankManagement
         public static string OptionSelectionPrompt = "Please select valid option : ";
         public static string PressKeyPrompt = "\nPress any key to continue";
         public static string PasswordPrompt = "Enter Password (Password must have atleast 8 characters, and atleast 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character) : ";
-        public static string DBUpdateExceptionMessage = "There was an error while updating database. Exception Details : ";
-        public static string SQLExceptionMessage = "There was an issue with database connection. Exception Details : ";
 
         public static class MainMenu
         {
@@ -33,6 +31,7 @@ namespace BankManagement
 
         public static class Staff
         {
+            public static string WelcomeMessage = "Welcome to {0} Bank! You are logged in as Bank Staff.\n";
             public static string Menu = "1. Create new account\n2. Update account\n3. Delete account\n4. Add new accepted currency\n5. Update service charges\n6. View account transaction history\n7. Revert a transaction\n8. Logout";
             public static string AccountIdPrompt = "Enter account ID : ";
             public static string TransactionIdPrompt = "Enter transacton ID to revert transaction : ";
@@ -62,6 +61,7 @@ namespace BankManagement
 
         public static class Account
         {
+            public static string WelcomeMessage = "Welcome to {0} Bank! You are logged in as account holder, {1}.\n";
             public static string Menu = "1. Deposit amount\n2. Withdraw amount (INR only)\n3. Transfer Funds (INR only)\n4. View Account Transaction History\n5. Logout";
             public static string TransactionTableHeader = $"{"Transaction ",41}{"Sender_Id ",14}{"Sender_Bank ",10}{"Sender_Name ",10}{"Recipient_ID ",14}{"Recipient_Bank ",10}{"Recipient_Name ",10}{"Amount ",8}{"Date_and_Time",21}";
             public static string InsufficientBalanceMessage = "Insufficient balance for action. Please try again.";
@@ -71,6 +71,9 @@ namespace BankManagement
             public static string WithdrawAmountPrompt = "Enter withdraw amount : ";
             public static string DepositAmountPrompt = "Enter deposit Amount : ";
             public static string InvalidCurrencyCode = "Given currency code is incorrect or not supported by bank. Please try again.";
+            public static string TransferSuccessMessage = "Amount transferred succesfully! Current balance: {0}";
+            public static string WithdrawSuccessMessage = "Amount withdrawn succesfully! Current balance: {0}";
+            public static string DepositSuccessMessage = "Amount deposited succesfully! Current balance: {0}";
         }
     }
 }

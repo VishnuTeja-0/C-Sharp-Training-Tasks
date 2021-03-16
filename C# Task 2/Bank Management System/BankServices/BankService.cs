@@ -130,14 +130,13 @@ namespace BankManagement.Services
             using (var context = new BankDBContext())
             {
                 Transaction transaction = context.Transactions.FirstOrDefault(i => i.TransactionId == transactionId);
-                decimal amount = transaction.Amount;
                 Account senderAccount = context.Accounts.FirstOrDefault(i => i.AccountId == transaction.SenderAccountId);
                 Account recipientAccount = context.Accounts.FirstOrDefault(i => i.AccountId == transaction.RecipientAccountId);
                 Bank senderBank = context.Banks.FirstOrDefault(i => i.BankId == senderAccount.BankId);
                 Bank recipientBank = context.Banks.FirstOrDefault(i => i.BankId == recipientAccount.BankId);
-                decimal serviceCharges = GetServiceCharges(senderBank.BankId, recipientBank.BankId, amount, senderBank.SameRtgs, senderBank.SameImps, senderBank.DiffRtgs, senderBank.DiffImps);
-                senderAccount.Balance += (amount + serviceCharges);
-                recipientAccount.Balance -= amount;
+                decimal serviceCharges = GetServiceCharges(senderBank.BankId, recipientBank.BankId, transaction.Amount, senderBank.SameRtgs, senderBank.SameImps, senderBank.DiffRtgs, senderBank.DiffImps);
+                senderAccount.Balance += (transaction.Amount + serviceCharges);
+                recipientAccount.Balance -= transaction.Amount;
                 context.Transactions.Remove(transaction);
                 context.SaveChanges();
             }
@@ -147,9 +146,8 @@ namespace BankManagement.Services
 
         #region Account Functions
 
-        public void DepositAmount(string bankId, string accountId, decimal amount, string currencyCode)
+        public void DepositAmount(string accountId, decimal amount, string currencyCode)
         {
-            Bank bank = GetBankById(bankId);
             using (var context = new BankDBContext())
             {
                 if (currencyCode != "INR")
@@ -191,7 +189,6 @@ namespace BankManagement.Services
 
         public List<Transaction> GetTransactions(string accountId)
         {
-            Account account = GetAccountById(accountId);
             using (var context = new BankDBContext())
             {
                 return context.Transactions.Where(i => i.SenderAccountId == accountId || i.RecipientAccountId == accountId).ToList();

@@ -17,7 +17,7 @@ namespace BankManagement.Contracts
         #endregion End of Staff Functions
 
         #region Account Functions
-        public void DepositAmount(string bankId, string accountId, decimal amount, string currencyCode);
+        public void DepositAmount(string accountId, decimal amount, string currencyCode);
         public void WithdrawAmount(string accountId, decimal amount);
         public void TransferFunds(string senderBankId, string senderAccountId, string recipientBankId, string recipientAccountId, decimal amount);
         public List<Transaction> GetTransactions(string accountId);
